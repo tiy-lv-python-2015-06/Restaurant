@@ -10,6 +10,11 @@ class Restaurant(models.Model):
     phone = models.CharField(max_length=100)
     user = models.OneToOneField(User)
 
+    def __str__(self):
+        return ("Name: {}, Address: {}, City: {}, State: {}, Zipcode: {}," \
+               "Phone: {}, User: {}".format(self.name, self.address, self.city,
+                                            self.state, self.zip_code,
+                                            self.phone, self.user))
 
 class FoodItem(models.Model):
     APPETIZER = 'A'
@@ -28,3 +33,8 @@ class FoodItem(models.Model):
     description = models.CharField(max_length=150)
     category = models.CharField(max_length=2, choices=MENU_CATEGORY_CHOICES,
                                 default=ENTREE, verbose_name='Menu Category')
+
+    def __str__(self):
+        return ("Restaurant: {}, Name: {}, Price: {}, Desc: {}, Category: {}"
+                .format(self.restaurant, self.name,
+                        self.description, self.category))
