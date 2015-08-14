@@ -10,5 +10,5 @@ class CustomerAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('restaurant', 'customer', 'menu', 'timestamp')
+    list_display = ('restaurant', 'customer', 'fooditem', 'timestamp')
 
