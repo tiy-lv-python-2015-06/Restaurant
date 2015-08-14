@@ -3,15 +3,29 @@ from django.db import models
 
 # Create your models here.
 
+class Restaurant(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zip_code = models.IntegerField(max_length=10)
+    phone = models.CharField(max_length=100)
+    user = models.OneToOneField(User)
+
+
+class Customer(models.Model):
+    user = models.OneToOneField(User)
+
+
 class FoodItem(models.Model):
     APPETIZER = 'A'
     SOUPSALAD = 'S'
-    ENTRE = 'E'
+    ENTREE = 'E'
     DESSERT = 'D'
     MENU_CATEGORY_CHOICES = (
         (APPETIZER, 'Appetizers'),
         (SOUPSALAD, 'Soups and Salads'),
-        (ENTRE, 'Entres'),
+        (ENTREE, 'Entrees'),
         (DESSERT, 'Desserts')
     )
     restaurant = models.ForeignKey(Restaurant)
@@ -29,15 +43,4 @@ class Order(models.Model):
     timestamp = models.DateTimeField()
 
 
-class Restaurant(models.Model):
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    zip_code = models.IntegerField(max_length=10)
-    phone = models.CharField(max_length=100)
-    user = models.OneToOneField(User)
 
-
-class Customer(models.Model):
-    user = models.OneToOneField(User)
