@@ -20,4 +20,6 @@ from customer.views import home
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', home.as_view(), name='home'),
+    url(r'^restaurant/', include('restaurant.urls')),
+    # url(r'^customer/', include('customer.urls')),
 ]
