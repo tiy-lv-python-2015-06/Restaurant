@@ -33,7 +33,7 @@ class FoodItem(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=150)
     category = models.CharField(max_length=2, choices=MENU_CATEGORY_CHOICES,
-                                default=ENTRE, verbose_name='Menu Category')
+                                default=ENTREE, verbose_name='Menu Category')
 
 
 class Order(models.Model):
