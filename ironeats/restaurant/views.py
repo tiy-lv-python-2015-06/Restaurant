@@ -8,4 +8,4 @@ from restaurant.models import Restaurant
 class RestaurantProfile(ListView):
     model = Restaurant
     template_name = "restaurant/restaurant_profile.html"
-    queryset = Restaurant.objects.get(pk=1)
+    #queryset = Restaurant.objects.get(pk=1)
