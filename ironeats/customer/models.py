@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from restaurant.models import Restaurant
+from restaurant.models import Restaurant, FoodItem
 
 
 class Customer(models.Model):
