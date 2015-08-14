@@ -23,7 +23,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    zip = models.CharField(max_length=100)
+    zip = models.IntegerField(max_length=10)
     phone = models.CharField(max_length=100)
     user = models.OneToOneField(User)
 
