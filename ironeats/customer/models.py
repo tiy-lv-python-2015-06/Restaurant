@@ -10,5 +10,5 @@ class Customer(models.Model):
 class Order(models.Model):
     restaurant = models.ForeignKey(Restaurant)
     customer = models.ForeignKey(Customer)
-    menu = models.ForeignKey(FoodItem)
+    fooditem = models.ForeignKey(FoodItem)
     timestamp = models.DateTimeField()
