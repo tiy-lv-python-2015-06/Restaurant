@@ -4,11 +4,22 @@ from django.db import models
 # Create your models here.
 
 class FoodItem(models.Model):
+    APPETIZER = 'A'
+    SOUPSALAD = 'S'
+    ENTRE = 'E'
+    DESSERT = 'D'
+    MENU_CATEGORY_CHOICES = (
+        (APPETIZER, 'Appetizers'),
+        (SOUPSALAD, 'Soups and Salads'),
+        (ENTRE, 'Entres'),
+        (DESSERT, 'Desserts')
+    )
     restaurant = models.ForeignKey(Restaurant)
     name = models.CharField(max_length=50)
     price = models.FloatField()
     description = models.CharField(max_length=150)
-    #category = [selection - relationship status]
+    category = models.CharField(max_length=2, choices=MENU_CATEGORY_CHOICES,
+                                default=ENTRE, verbose_name='Menu Category')
 
 
 class Order(models.Model):
@@ -23,7 +34,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
-    zip = models.IntegerField(max_length=10)
+    zip_code = models.IntegerField(max_length=10)
     phone = models.CharField(max_length=100)
     user = models.OneToOneField(User)
 
