@@ -1,0 +1,23 @@
+{#{% extends 'base.html' %}#}
+{#{% load bootstrap3 %}#}
+{% block content %}
+    <h1 class="header">IRONEATS</h1>
+    <ol>
+        {% for rest in restaurant %}
+{#            <li><a href="{% url 'rest' rest.pk %}">{{ rest.name }}</a></li><br>#}
+            <li>{{ rest.name }}<br>
+            {{ rest.address }}, {{ rest.zip_code }},</li>
+
+        {% endfor %}
+    </ol>
+    {% if page_obj.has_previous %}
+        <a href="{% url 'top20' %}?page={{ page_obj.previous_page_number }}"><-Prev</a>
+    {% endif %}
+
+    {{ page_obj }}
+    {% if page_obj.has_next %}
+        <a href="{% url 'top20' %}?page={{ page_obj.next_page_number }}">Next-></a>
+    {% endif %}
+
+    </ol>
+{% endblock %}
