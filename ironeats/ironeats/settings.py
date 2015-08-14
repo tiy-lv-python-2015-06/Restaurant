@@ -37,10 +37,12 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'eats',
+    'order',
     'django_extensions',
     'debug_toolbar',
     'bootstrap3',
+    'customer',
+    'restaurant'
 )
 
 MIDDLEWARE_CLASSES = (
