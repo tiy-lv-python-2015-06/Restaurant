@@ -9,5 +9,5 @@ class home(ListView):
     model = Restaurant
     template_name = "home.html"
     queryset = Restaurant.objects.all()
-    context_object_name = 'restaurants'
+    context_object_name = 'restaurant'
     paginate_by = 20
