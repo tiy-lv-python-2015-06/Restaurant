@@ -9,7 +9,4 @@ urlpatterns = [
         RestaurantProfile.as_view(), name='restaurant_profile'),
     url(r'^order_list/', OrderList.as_view(), name='order_list'),
         url(r'^', include('django.contrib.auth.urls')),
-    url(r'/login/', auth_views.login,
-        {'login.html': 'templates/registration/login.html'}, name='login'),
-
 ]
