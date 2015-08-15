@@ -5,8 +5,8 @@ from restaurant.models import Restaurant, FoodItem
 
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ('user', 'name', 'address', 'city',
-                    'state', 'zip_code', 'phone',)
+    list_display = ('user', 'business_name', 'address', 'city',
+                    'state', 'zip_code', 'phone_number',)
 
 
 @admin.register(FoodItem)
