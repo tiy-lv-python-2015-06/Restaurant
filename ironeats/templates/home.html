@@ -3,15 +3,15 @@
 {% block content %}
 {#   REPLACE THIS IN THE BASE HTML! <h1 class="header">IRONEATS</h1>#}
     <div style='text-align: right'>
-    <a class="btn btn-danger" href="{% url 'home' %}"> Restaurant Login </a>
-    <a class="btn btn-danger" href="{% url 'home' %}"> Customer Login </a>
+    <a class="btn btn-danger" href="{% url 'login' %}"> Restaurant Login </a>
+    <a class="btn btn-danger" href="{% url 'login' %}"> Customer Login </a>
     </div>
 
 {#    OUT HEADER GOES HERE#}
          <h1 class="header" style="text-align: center">IRONEATS</h1>
     <P>
     <ol>
-        {% for rest in restaurant %}
+        {% for rest in restaurants %}
             <li><a href="{% url 'home' %}">{{ rest.name }}</a></li>
             {{ rest.address }}, {{ rest.zip_code }},</li><br>
 

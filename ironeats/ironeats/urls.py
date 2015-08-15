@@ -21,6 +21,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', home.as_view(), name='home'),
     url(r'^restaurant/', include('restaurant.urls')),
-    url(r'^', include('django.contrib.auth.urls')),
-    # url(r'^customer/', include('customer.urls')),
+    url(r'^customer/', include('customer.urls')),
 ]
