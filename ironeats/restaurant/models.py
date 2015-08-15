@@ -38,5 +38,5 @@ class FoodItem(models.Model):
 
     def __str__(self):
         return ("Restaurant: {}, Name: {}, Price: {}, Desc: {}, Category: {}"
-                .format(self.restaurant, self.name,
+                .format(self.restaurant, self.name, self.price,
                         self.description, self.category))
