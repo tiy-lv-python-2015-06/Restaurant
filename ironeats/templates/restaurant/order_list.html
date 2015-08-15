@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load bootstrap3 %}
 
-</body>
-</html>
+{% block title %}Restaurant Order List{% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+    <h1>Here is a list of all your orders:</h1>
+    <h3>{{ restaurant.name }}</h3>
+    {% for order in order_list %}
+        {{ order.fooditem }}
+    {% endfor %}
+{% endblock %}
