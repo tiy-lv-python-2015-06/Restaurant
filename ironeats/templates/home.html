@@ -1,15 +1,23 @@
-{#{% extends 'base.html' %}#}
-{#{% load bootstrap3 %}#}
+{% extends 'base.html' %}
+{% load bootstrap3 %}
 {% block content %}
-    <h1 class="header">IRONEATS</h1>
+{#   REPLACE THIS IN THE BASE HTML! <h1 class="header">IRONEATS</h1>#}
+    <div style='text-align: right'>
+    <a class="btn btn-danger" href="{% url 'home' %}"> Restaurant Login </a>
+    <a class="btn btn-danger" href="{% url 'home' %}"> Customer Login </a>
+    </div>
+
+{#    OUT HEADER GOES HERE#}
+         <h1 class="header" style="text-align: center">IRONEATS</h1>
+    <P>
     <ol>
         {% for rest in restaurant %}
-{#            <li><a href="{% url 'rest' rest.pk %}">{{ rest.name }}</a></li><br>#}
-            <li>{{ rest.name }}<br>
-            {{ rest.address }}, {{ rest.zip_code }},</li>
+            <li><a href="{% url 'home' %}">{{ rest.name }}</a></li>
+            {{ rest.address }}, {{ rest.zip_code }},</li><br>
 
         {% endfor %}
     </ol>
+    </p>
     {% if page_obj.has_previous %}
         <a href="{% url 'top20' %}?page={{ page_obj.previous_page_number }}"><-Prev</a>
     {% endif %}
@@ -21,3 +29,6 @@
 
     </ol>
 {% endblock %}
+
+{#TODO# fix link to actual login pages, alight to top right. add header to base
+html, add classes, stylize forms. add block content to the content}
