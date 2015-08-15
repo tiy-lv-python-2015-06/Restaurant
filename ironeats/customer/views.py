@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from restaurant.models import Restaurant
 
 
-class home(ListView):
+class Home(ListView):
     model = Restaurant
     template_name = "home.html"
     queryset = Restaurant.objects.all()
