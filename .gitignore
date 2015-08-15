@@ -58,3 +58,6 @@ target/
 
 .idea/*
 db.sqlite3
+.idea
+.envrc
+.direnv
