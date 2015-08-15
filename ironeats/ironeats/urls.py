@@ -21,7 +21,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^', include('django.contrib.auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^home/', Home.as_view(), name='home'),
+    url(r'^$', Home.as_view(), name='home'),
     url(r'^restaurant/', include('restaurant.urls')),
     url(r'^customer/', include('customer.urls')),
     url(r'restaurant/login/', auth_views.login, name='rest_login'),
