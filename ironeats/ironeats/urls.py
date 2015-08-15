@@ -24,7 +24,11 @@ urlpatterns = [
     url(r'^restaurant/', include('restaurant.urls')),
     url(r'^customer/', include('customer.urls')),
     url(r'restaurant/login/', auth_views.login,
-        {'login.html': 'templates/registration/login.html'}, name='rest_login'),
+        {'login.html':
+             'templates/registration/login.html'},
+        name='rest_login'),
     url(r'customer/login/', auth_views.login,
-        {'login.html': 'templates/registration/login.html'}, name='cust_login'),
+        {'login.html':
+             'templates/registration/login.html'},
+        name='cust_login'),
 ]
