@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Restaurant(models.Model):
-    business_name = models.CharField(max_length=100)
+    business_name = models.CharField(max_length=100, null=True)
     email = models.EmailField()
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -14,9 +14,9 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return ("Name: {}, Address: {}, City: {}, State: {}, Zipcode: {},"
-                "Phone: {}, User: {}".format(self.name, self.address, self.city,
+                "Phone: {}, User: {}".format(self.business_name, self.address, self.city,
                                              self.state, self.zip_code,
-                                             self.phone, self.user))
+                                             self.phone_number, self.user))
 
 
 class FoodItem(models.Model):

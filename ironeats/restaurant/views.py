@@ -2,10 +2,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 from customer.models import Order
-from restaurant.forms import RestaurantCreateForm
+from restaurant.forms import UserForm
 from restaurant.models import Restaurant
+from django.contrib.auth import login, authenticate
+from django.http import HttpResponseRedirect
 
 
 class RestaurantProfile(DetailView):
@@ -21,18 +23,46 @@ class OrderList(ListView):
     paginate_by = 20
 
 
-def restaurantregister(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+def createuser(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(form.cleaned_data['username'],
-                                            form.cleaned_data['email'],
-                                            form.cleaned_data['password'],
-                                            form.cleaned_data['business_name'])
-            user.save()
-            return render_to_response('restaurant/restaurant_profile.html')
+            user = User.objects.create_user(**form.cleaned_data)
+            user = authenticate(username=None, password=None)
+            login(request, user)
+            # redirect, or however you want to get to the main view
+            return HttpResponseRedirect('home.html')
     else:
-        form = UserCreationForm()
-    return render_to_response('registration/restaurant_registration.html',
-                              {'form': form},
-                              context_instance=RequestContext(request))
+        form = UserForm()
+
+    return render(request, 'registration/customer_registration.html',
+                  {'form': form})
+
+
+
+
+
+# class RestaurantCreate(CreateView):
+#     model = Restaurant
+#     fields = ['business_name', 'email', 'address', 'city',
+#               'state', 'zip_code', 'phone_number']
+#     template_name = 'registration/restaurant_registration.html'
+#     success_url = '/restaurant_profile/'
+#
+#     def form_valid(self, form):
+#         self.object = form.save()
+#         return super(RestaurantCreate, self).form_valid(form)
+
+# def restaurantregister(request):
+#     if request.method == 'POST':
+#         form = RestaurantCreateForm(request.POST)
+#
+#         if form.is_valid():
+#             rest_user = RestaurantCreateForm(request.POST)
+#             rest_user.save()
+#             return render_to_response('restaurant/restaurant_profile.html')
+#     else:
+#         form = RestaurantCreateForm()
+#     return render_to_response('registration/restaurant_registration.html',
+#                               {'form': form},
+#                               context_instance=RequestContext(request))

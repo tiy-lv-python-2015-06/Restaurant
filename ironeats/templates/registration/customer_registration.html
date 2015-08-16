@@ -5,6 +5,11 @@
     <title></title>
 </head>
 <body>
-
+    <h1>Create a new account</h1>
+    <form method="post" action="">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Create new user account" />
+</form>
 </body>
 </html>
