@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from restaurant.views import RestaurantProfile, OrderList, CreateMenu, \
-    UpdateMenu
+    UpdateMenu, ManageMenu, DeleteItem
 
 urlpatterns = [
 
@@ -14,6 +14,12 @@ urlpatterns = [
     url(r'^create_menu/(?P<restaurant_id>[0-9]+)',
         CreateMenu.as_view(), name='create_menu'),
 
-    url(r'^update_menu/(?P<restaurant_id>[0-9]+)',
+    url(r'^update_menu/(?P<fooditem_id>[0-9]+)',
         UpdateMenu.as_view(), name='update_menu'),
+
+    url(r'^delete_menu_item/(?P<fooditem_id>[0-9]+)',
+        DeleteItem.as_view(), name='delete_menu_item'),
+
+    url(r'^manage_menu/(?P<restaurant_id>[0-9]+)',
+        ManageMenu.as_view(), name='manage_menu'),
 ]

@@ -19,20 +19,15 @@ class OrderList(DetailView):
     pk_url_kwarg = 'restaurant_id'
     template_name = 'restaurant/order_list.html'
 
-    # model = Order
-    # template_name = "restaurant/order_list.html"
-    # queryset = Order.objects.all().order_by('timestamp')
-    # paginate_by = 20
-
 
 class CreateMenu(CreateView):
     model = FoodItem
     fields = ('name', 'price', 'description', 'category', )
-    success_url = reverse_lazy('update_menu')
+    # success_url = reverse_lazy('manage_menu')
     template_name = "restaurant/create_menu.html"
 
     def get_success_url(self):
-        return reverse('update_menu',
+        return reverse('manage_menu',
                        kwargs={'restaurant_id':
                                    self.kwargs.get('restaurant_id', None)})
 
@@ -52,42 +47,44 @@ class CreateMenu(CreateView):
         return super(CreateMenu, self).form_valid(form)
 
 
-class UpdateMenu(UpdateView):
+class ManageMenu(ListView):
     model = FoodItem
-    fields = ['name', 'price', 'description', 'category', ]
-    pk_url_kwarg = 'restaurant_id'
-    template_name = "restaurant/update_menu.html"
+    template_name = "restaurant/manage_menu.html"
+    # paginate_by = 10
+
+    def get_queryset(self):
+        queryset = Restaurant.objects.get(
+            pk=self.kwargs.get('restaurant_id', None)).fooditem_set.all()
+        return queryset
 
     def get_context_data(self, **kwargs):
-        context = super(UpdateMenu, self).get_context_data(**kwargs)
-        # context['restaurant_id'] = self.kwargs.get('restaurant_id', None)
+        context = super(ManageMenu, self).get_context_data(**kwargs)
         context['restaurant'] = Restaurant.objects.get(
             pk=self.kwargs.get('restaurant_id', None))
         return context
 
-    # def get_queryset(self):
-    #     rest_id = self.kwargs.get('restaurant_id', None)
-    #     queryset = Restaurant.objects.get(pk=rest_id).get_menu_items()
-    #     return queryset
+
+class UpdateMenu(UpdateView):
+    model = FoodItem
+    fields = ['name', 'price', 'description', 'category', ]
+    pk_url_kwarg = 'fooditem_id'
+    template_name = "restaurant/update_menu.html"
 
     def get_success_url(self):
-        return reverse('update_menu')
+        fooditem = FoodItem.objects.get(pk=self.kwargs.get('fooditem_id', None))
+        return reverse('manage_menu',
+                       kwargs={'restaurant_id': fooditem.restaurant.id})
 
 
-# def RestMenu(request, pk):
-#     restaurant = Restaurant.objects.get(pk=pk)
-#     FoodInlineFormSet = inlineformset_factory(Restaurant, FoodItem, fields=('qty',))
-#     if request.method == "POST":
-#         formset = FoodInlineFormSet(request.POST, request.FILES, instance=restaurant)
-#         if formset.is_valid():
-#             formset.save()
-#             # Do something. Should generally end with a redirect. For example:
-#             return HttpResponse('')
-#     else:
-#         formset = FoodInlineFormSet(instance=restaurant)
-#     return render_to_response("order/menu.html", {
-#         "formset": formset,
-#     })
+class DeleteItem(DeleteView):
+    model = FoodItem
+    pk_url_kwarg = 'fooditem_id'
+    template_name = "restaurant/delete_menu_item.html"
+
+    def get_success_url(self):
+        fooditem = FoodItem.objects.get(pk=self.kwargs.get('fooditem_id', None))
+        return reverse('manage_menu',
+                       kwargs={'restaurant_id': fooditem.restaurant.id})
 
 
 class DeleteMenu(DeleteView):
