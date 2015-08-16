@@ -39,10 +39,13 @@ class PlaceOrder(CreateView):
     def form_valid(self, form):
         fooditem = FoodItem.objects.get(pk=self.request.POST.get('fooditempk'))
         form.instance.fooditem = fooditem
-        if self.request.user.customer.order.get(submited = False) == None:
-            form.instance.order = self.request.user.order.get(submited = False)
-        else:
-            form.instance.order = Order(self.request.Restaurant, self.request.user,)
+        try:
+            order = self.request.user.customer.order.get(submited = False)
+            form.instance.order = order
+            form.instance.order.save()
+        except:
+            form.instance.order = Order.objects.create(restaurant=fooditem.restaurant, customer=self.request.user.customer,)
+            form.instance.order.save()
         return super(PlaceOrder, self).form_valid(form)
 
 class Confirm(ListView):
