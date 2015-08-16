@@ -37,7 +37,7 @@ class FoodItem(models.Model):
     category = models.CharField(max_length=2, choices=MENU_CATEGORY_CHOICES,
                                 default=ENTREE, verbose_name='Menu Category')
 
+
     def __str__(self):
-        return ("Restaurant: {}, Name: {}, Price: {}, Desc: {}, Category: {}"
-                .format(self.restaurant, self.name, self.price,
-                        self.description, self.category))
+        return ("Name: {}"
+                .format(self.name,))
