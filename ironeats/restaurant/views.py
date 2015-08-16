@@ -28,10 +28,9 @@ def createuser(request):
         form = UserForm(request.POST)
         if form.is_valid():
             user = User.objects.create_user(**form.cleaned_data)
-            user = authenticate(username=None, password=None)
-            login(request, user)
-            # redirect, or however you want to get to the main view
-            return HttpResponseRedirect('home.html')
+            # user = authenticate(username=None, password=None)
+            # login(request, user)
+            return HttpResponseRedirect('/')
     else:
         form = UserForm()
 
@@ -39,15 +38,12 @@ def createuser(request):
                   {'form': form})
 
 
-
-
-
-# class RestaurantCreate(CreateView):
-#     model = Restaurant
-#     fields = ['business_name', 'email', 'address', 'city',
-#               'state', 'zip_code', 'phone_number']
-#     template_name = 'registration/restaurant_registration.html'
-#     success_url = '/restaurant_profile/'
+class RestaurantCreate(CreateView):
+    model = Restaurant
+    fields = ['user', 'business_name', 'email', 'address', 'city',
+              'state', 'zip_code', 'phone_number']
+    template_name = 'registration/restaurant_registration.html'
+    success_url = '/'
 #
 #     def form_valid(self, form):
 #         self.object = form.save()

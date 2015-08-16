@@ -11,15 +11,12 @@ class UserForm(ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
-
-
-
-
-# class RestaurantForm(forms.ModelForm):
+#
+# class RestaurantForm(ModelForm):
 #     class Meta:
 #         model = Restaurant
 #         fields = '__all__'
-        # template_name = 'registration/restaurant_registration.html'
+#         template_name = 'registration/restaurant_registration.html'
 
 
 

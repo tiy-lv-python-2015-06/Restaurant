@@ -5,11 +5,11 @@
     <title></title>
 </head>
 <body>
-    <h1>Create a new account</h1>
-    <form method="post" action="">
+        <h2>Register</h2>
+    <form action = '' method = 'POST'>
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Create new user account" />
-</form>
+    {{form.as_p}}
+    <input type = 'submit' value = "Register" />
+    </form>
 </body>
 </html>
