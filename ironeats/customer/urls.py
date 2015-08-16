@@ -1,5 +1,6 @@
-from django.conf.urls import url, include
-from django.contrib.auth import views as auth_views
+from django.conf.urls import url
 #
+
 urlpatterns = [
+        url(r'^(?P<pk>[0-9]+)/', 'customer.views.menu', name='menu'),
 ]

@@ -12,7 +12,7 @@
     <P>
     <ol>
         {% for rest in restaurant %}
-            <li><a href="{% url 'home' %}">{{ rest.business_name }}</a></li>
+            <li><a href="{% url 'menu' rest.pk %}">{{ rest.business_name }}</a></li>
             {{ rest.address }}, {{ rest.zip_code }},</li><br>
 
         {% endfor %}
