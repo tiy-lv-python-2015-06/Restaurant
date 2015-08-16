@@ -28,5 +28,5 @@ class Order(models.Model):
         ))
 class OrderItem(models.Model):
     fooditem = models.ForeignKey(FoodItem)
-    order = models.ForeignKey(Customer)
+    order = models.ForeignKey(Order)
     quantity = models.IntegerField(default=1)
