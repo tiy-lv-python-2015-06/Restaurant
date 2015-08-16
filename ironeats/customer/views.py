@@ -13,7 +13,7 @@ from customer.models import Customer
 from django.views.generic import ListView, CreateView
 from customer.models import Order, OrderItem
 from restaurant.forms import UserForm
-from restaurant.models import Restaurant
+from restaurant.models import Restaurant, FoodItem
 
 
 class Home(ListView):
@@ -41,9 +41,8 @@ def menu(request, pk):
 class PlaceOrder(CreateView):
     model = OrderItem
     fields = ('quantity',)
-    success_url = reverse_lazy('menu')
-    # Default = chirp_form.html
     template_name = "order/order.html"
+
     def get_success_url(self):
         return reverse('menu', kwargs={'pk': self.kwags.get('pk', None)})
 
@@ -51,18 +50,20 @@ class PlaceOrder(CreateView):
         context = super(PlaceOrder, self).get_context_data(**kwargs)
         fooditem = self.kwargs.get('pk')
         context['restaurant'] = FoodItem.objects.get(pk=fooditem).restaurant
-        context['fooditem'] =  FoodItem.objects.get(pk=fooditem)
+        context['fooditem'] = FoodItem.objects.get(pk=fooditem)
         return context
 
     def form_valid(self, form):
         fooditem = FoodItem.objects.get(pk=self.request.POST.get('fooditempk'))
         form.instance.fooditem = fooditem
         try:
-            order = self.request.user.customer.order.get(submited = False)
+            order = self.request.user.customer.order.get(submited=False)
             form.instance.order = order
             form.instance.order.save()
         except:
-            form.instance.order = Order.objects.create(restaurant=fooditem.restaurant, customer=self.request.user.customer,)
+            form.instance.order = Order.objects.create(
+                restaurant=fooditem.restaurant,
+                customer=self.request.user.customer, )
             form.instance.order.save()
         return super(PlaceOrder, self).form_valid(form)
 
