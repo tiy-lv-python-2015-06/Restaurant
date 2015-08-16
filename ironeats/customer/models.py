@@ -26,7 +26,9 @@ class Order(models.Model):
         return ("Restaurant: {}, Customer: {}, Time: {}".format(
             self.restaurant, self.customer, self.timestamp
         ))
+
+
 class OrderItem(models.Model):
     fooditem = models.ForeignKey(FoodItem)
     order = models.ForeignKey(Customer)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=0)

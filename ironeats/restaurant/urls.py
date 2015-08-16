@@ -11,6 +11,5 @@ urlpatterns = [
         RestaurantProfile.as_view(), name='restaurant_profile'),
     url(r'^order_list/', OrderList.as_view(), name='order_list'),
     url(r'^register/business/', RestaurantCreate.as_view(), name='rest_reg'),
-    url(r'^register/', restaurant.views.createuser, name='create_user')
 
 ]

@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Please Login Below</title>
-</head>
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
         <h1>Please Login</h1>
 <body>
 
@@ -19,4 +16,4 @@
     <a href="{% url 'rest_reg' %}">Restaurant Sign up</a>
     <a href="{% url 'cust_reg' %}">Customer Sign up</a>
 </body>
-</html>
+{% endblock %}
