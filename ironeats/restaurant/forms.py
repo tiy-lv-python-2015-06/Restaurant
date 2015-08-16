@@ -1,9 +1,5 @@
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from django.views.generic import CreateView
-from restaurant.models import Restaurant, FoodItem
 
 
 class UserForm(ModelForm):
@@ -45,7 +41,7 @@ class UserForm(ModelForm):
 #         user.city = self.cleaned_data['city']
 #         user.state = self.cleaned_data['state']
 #         user.zip_code = self.cleaned_data['zip_code']
-#         user.phone_number = self.cleaned_datad['phone_number']
+#         user.phone_number = self.cleaned_data['phone_number']
 #         if commit:
 #             user.save()
 #         return user

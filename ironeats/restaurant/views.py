@@ -1,13 +1,6 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
 from django.views.generic import DetailView, ListView, CreateView
 from customer.models import Order
-from restaurant.forms import UserForm
 from restaurant.models import Restaurant
-from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
 
 
 class RestaurantProfile(DetailView):
