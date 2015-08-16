@@ -1,3 +1,4 @@
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
@@ -49,3 +50,13 @@ class UserForm(ModelForm):
 #         if commit:
 #             user.save()
 #         return user
+
+from django.forms import ModelForm
+from restaurant.models import FoodItem
+
+
+class FoodItemForm(ModelForm):
+    class Meta:
+        model = FoodItem
+        fields = ('name', 'price', 'description', 'category', )
+
