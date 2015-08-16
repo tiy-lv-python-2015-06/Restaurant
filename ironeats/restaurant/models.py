@@ -12,6 +12,20 @@ class Restaurant(models.Model):
     phone_number = models.CharField(max_length=100)
     user = models.OneToOneField(User)
 
+    def has_menu(self):
+        menu_exists = (FoodItem.objects.get(pk=self.user.restaurant.id) != None)
+        return menu_exists
+
+    def get_menu_items(self):
+        menu_list = FoodItem.objects.get(pk=self.user.restaurant.id)
+        return menu_list
+
+    # def has_rated_movie(self, movie_id):
+    #     rater = Rater.objects.get(pk=self.user.rater.id)
+    #     ratings = rater.rating_set
+    #     rated = len(ratings.filter(movie__id=movie_id)) > 0
+    #     return rated
+
     def __str__(self):
         return ("Name: {}, Address: {}, City: {}, State: {}, Zipcode: {},"
                 "Phone: {}, User: {}".format(self.business_name, self.address,
