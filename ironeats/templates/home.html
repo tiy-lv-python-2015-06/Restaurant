@@ -5,6 +5,8 @@
     <div style='text-align: right'>
     <a class="btn btn-danger" href="{% url 'rest_login' %}"> Restaurant Login </a>
     <a class="btn btn-danger" href="{% url 'cust_login' %}"> Customer Login </a>
+    <a class="btn btn-danger" href="{% url 'create_user' %}"> Register </a>
+{#    <a class="btn btn-danger" href="{% url 'restaurant_profile' restaurant_id %}"> Restaurant Profile </a>#}
     </div>
 
 {#    OUR HEADER GOES HERE#}
@@ -19,12 +21,12 @@
     </ol>
     </p>
     {% if page_obj.has_previous %}
-        <a href="{% url 'top20' %}?page={{ page_obj.previous_page_number }}"><-Prev</a>
+        <a href="{% url 'home' %}?page={{ page_obj.previous_page_number }}"><-Prev</a>
     {% endif %}
 
     {{ page_obj }}
     {% if page_obj.has_next %}
-        <a href="{% url 'top20' %}?page={{ page_obj.next_page_number }}">Next-></a>
+        <a href="{% url 'home' %}?page={{ page_obj.next_page_number }}">Next-></a>
     {% endif %}
 
     </ol>

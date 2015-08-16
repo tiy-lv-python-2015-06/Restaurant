@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -59,7 +60,8 @@ def createuser(request):
         if form.is_valid():
             user = User.objects.create_user(**form.cleaned_data)
             # user = authenticate(username=None, password=None)
-            # login(request, user)
+            # if request.user.is_authenticated():
+            #     login(request, user)
             return HttpResponseRedirect('/')
     else:
         form = UserForm()

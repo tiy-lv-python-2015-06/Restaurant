@@ -16,9 +16,11 @@ urlpatterns = [
 
     url(r'^customer/', include('customer.urls')),
 
-    url(r'restaurant/login/', auth_views.login, name='rest_login'),
+    url(r'restaurant/login/', auth_views.login,
+        {'extra_context': {'next': '/'}}, name='rest_login'),
 
-    url(r'customer/login/', auth_views.login, name='cust_login'),
+    url(r'customer/login/', auth_views.login,
+        {'extra_context': {'next': '/'}}, name='cust_login'),
 
     url(r'^register/', customer.views.createuser, name='create_user'),
 
