@@ -5,12 +5,21 @@ from customer.views import Home
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+
     url(r'^', include('django.contrib.auth.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
+
     url(r'^$', Home.as_view(), name='home'),
+
     url(r'^restaurant/', include('restaurant.urls')),
+
     url(r'^customer/', include('customer.urls')),
+
     url(r'restaurant/login/', auth_views.login, name='rest_login'),
+
     url(r'customer/login/', auth_views.login, name='cust_login'),
+
     url(r'^register/', customer.views.createuser, name='create_user'),
+
 ]

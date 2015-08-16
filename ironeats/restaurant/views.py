@@ -1,22 +1,8 @@
-
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
-from django.views.generic import DetailView, ListView, CreateView
-from customer.models import Order
-from restaurant.models import Restaurant
-from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.shortcuts import render
-
-# Create your views here.
-from django.views.generic import DetailView, ListView, CreateView, UpdateView, \
-    DeleteView
+from django.views.generic import DetailView, ListView, CreateView, \
+                                 UpdateView, DeleteView
 from customer.models import Order
 from restaurant.models import Restaurant, FoodItem
-
 
 
 class RestaurantProfile(DetailView):
@@ -25,12 +11,10 @@ class RestaurantProfile(DetailView):
     template_name = 'restaurant/restaurant_profile.html'
 
 
-
-class OrderList(ListView):
-    model = Order
-    template_name = "restaurant/order_list.html"
-    queryset = Order.objects.all().order_by('timestamp')
-    paginate_by = 20
+class OrderList(DetailView):
+    model = Restaurant
+    pk_url_kwarg = 'restaurant_id'
+    template_name = 'restaurant/order_list.html'
 
 
 class RestaurantCreate(CreateView):
@@ -38,7 +22,7 @@ class RestaurantCreate(CreateView):
     fields = ['user', 'business_name', 'email', 'address', 'city',
               'state', 'zip_code', 'phone_number']
     template_name = 'registration/restaurant_registration.html'
-    success_url = '/'
+    success_url = 'restaurant_profile'
 #
 #     def form_valid(self, form):
 #         self.object = form.save()
@@ -58,11 +42,6 @@ class RestaurantCreate(CreateView):
 #                               {'form': form},
 #                               context_instance=RequestContext(request))
 
-class OrderList(DetailView):
-    model = Restaurant
-    pk_url_kwarg = 'restaurant_id'
-    template_name = 'restaurant/order_list.html'
-
 
 class CreateMenu(CreateView):
     model = FoodItem
@@ -73,7 +52,7 @@ class CreateMenu(CreateView):
     def get_success_url(self):
         return reverse('manage_menu',
                        kwargs={'restaurant_id':
-                                   self.kwargs.get('restaurant_id', None)})
+                              self.kwargs.get('restaurant_id', None)})
 
     def get_context_data(self, **kwargs):
         context = super(CreateMenu, self).get_context_data(**kwargs)
@@ -115,7 +94,8 @@ class UpdateMenu(UpdateView):
     template_name = "restaurant/update_menu.html"
 
     def get_success_url(self):
-        fooditem = FoodItem.objects.get(pk=self.kwargs.get('fooditem_id', None))
+        fooditem = FoodItem.objects.get\
+                   (pk=self.kwargs.get('fooditem_id', None))
         return reverse('manage_menu',
                        kwargs={'restaurant_id': fooditem.restaurant.id})
 

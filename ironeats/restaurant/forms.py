@@ -1,14 +1,17 @@
-
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from restaurant.models import FoodItem
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
+
+class FoodItemForm(ModelForm):
+    class Meta:
+        model = FoodItem
+        fields = ('name', 'price', 'description', 'category', )
 
 #
 # class RestaurantForm(ModelForm):
@@ -48,13 +51,3 @@ class UserForm(ModelForm):
 #         if commit:
 #             user.save()
 #         return user
-
-from django.forms import ModelForm
-from restaurant.models import FoodItem
-
-
-class FoodItemForm(ModelForm):
-    class Meta:
-        model = FoodItem
-        fields = ('name', 'price', 'description', 'category', )
-

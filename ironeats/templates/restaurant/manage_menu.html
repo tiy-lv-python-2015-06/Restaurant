@@ -4,7 +4,7 @@
 {% block title %}Manage Menu{% endblock %}
 
 {% block content %}
-    <h1>Hello "{{ restaurant.name }}".  <br>Here is your current menu:</h1>
+    <h1>Hello "{{ restaurant.business_name }}".  <br>Here is your current menu:</h1>
     <center>
         <h4><a href="{% url 'restaurant_profile' restaurant.id %}">
                 Go back to my restaurant profile
