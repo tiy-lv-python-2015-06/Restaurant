@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Manage Menu{% endblock %}
+
+{% block content %}
+    <h1>Hello "{{ restaurant.business_name }}".  <br>Here is your current menu:</h1>
+    <center>
+        <h4><a href="{% url 'restaurant_profile' restaurant.id %}">
+                Go back to my restaurant profile
+            </a>
+        </h4>
+    </center>
+    <ol>
+    <a href="{% url 'create_menu' restaurant.id %}">Add a new menu item</a>
+        <br><br>
+    {% for item in fooditem_list %}
+       <div>
+           <a href="{% url 'update_menu' item.id %}">Edit</a>
+           <a href="{% url 'delete_menu_item' item.id %}">Delete</a></div>
+        <div>
+           <li>{{ item.name }}<br>
+            Price: {{ item.price }}<br>
+            Description: {{ item.description }}<br>
+            Category:  {{ item.category }}<br></li><br>
+        </div>
+    {% endfor %}
+    </ol>
+    <center>
+        <h4><a href="{% url 'restaurant_profile' restaurant.id %}">
+                Go back to my restaurant profile
+            </a>
+        </h4>
+    </center>
+{% endblock %}

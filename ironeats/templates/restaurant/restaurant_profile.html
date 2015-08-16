@@ -6,12 +6,36 @@
 {% block content %}
     {% csrf_token %}
     <h1>Hi, welcome to your restaurant profile account:</h1>
-    <h3>{{ restaurant.name }}</h3>
-    <h4><a href="{% url 'order_list' %}">Click here to view current orders:</a></h4>
-    <h4>View past orders</h4>
-    <h4>Manage Menu</h4>
-    <h4>Delete Menu</h4>
-    <h4>Update Profile</h4>
-
+    <h3>{{ restaurant.business_name }}:</h3>
+    <style type="text/css">
+        <!--
+            .tab { margin-left: 40px; }
+            .tab2 { margin-left: 100px; }
+        -->
+    </style>
+    <br>
+    <h3><p class="tab">ORDERS:</p></h3>
+    <h4><p class="tab2">
+        <a href="{% url 'order_list' restaurant.id %}">
+            Click here to view current orders</a><br>
+{#        View past orders<br>#}
+    </p></h4>
+    <h3><p class="tab">MENU:</p></h3>
+    <h4><p class="tab2">
+        {% if restaurant.has_menu %}
+            <a href="{% url 'manage_menu' restaurant.id %}">
+                Manage Menu
+            </a>
+        {% else %}
+            <a href="{% url 'create_menu' restaurant.id %}">
+                Create Menu
+            </a>
+        {% endif %}
+    </p></h4>
+    <br>
+    <h3><p class="tab">PROFILE:</p></h3>
+    <h4><p class="tab2">
+        Update Profile
+    </p></h4>
 {% endblock %}
 

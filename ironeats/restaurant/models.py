@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Restaurant(models.Model):
-    business_name = models.CharField(max_length=100)
+    business_name = models.CharField(max_length=100, null=True)
     email = models.EmailField()
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -12,9 +12,19 @@ class Restaurant(models.Model):
     phone_number = models.CharField(max_length=100)
     user = models.OneToOneField(User)
 
+    def has_menu(self):
+        menu_exists = (FoodItem.objects.get
+                       (pk=self.user.restaurant.id) is not None)
+        return menu_exists
+
+    def get_menu_items(self):
+        menu_list = FoodItem.objects.get(pk=self.user.restaurant.id)
+        return menu_list
+
     def __str__(self):
         return ("Name: {}, Address: {}, City: {}, State: {}, Zipcode: {},"
-                "Phone: {}, User: {}".format(self.business_name, self.address, self.city,
+                "Phone: {}, User: {}".format(self.business_name, self.address,
+                                             self.city,
                                              self.state, self.zip_code,
                                              self.phone_number, self.user))
 
@@ -36,7 +46,6 @@ class FoodItem(models.Model):
     description = models.CharField(max_length=150)
     category = models.CharField(max_length=2, choices=MENU_CATEGORY_CHOICES,
                                 default=ENTREE, verbose_name='Menu Category')
-
 
     def __str__(self):
         return ("Name: {}"
