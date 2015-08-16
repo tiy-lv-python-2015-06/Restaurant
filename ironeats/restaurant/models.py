@@ -36,7 +36,7 @@ class FoodItem(models.Model):
     description = models.CharField(max_length=150)
     category = models.CharField(max_length=2, choices=MENU_CATEGORY_CHOICES,
                                 default=ENTREE, verbose_name='Menu Category')
-    qty = models.IntegerField(default=0,)
+
 
     def __str__(self):
         return ("Name: {}"

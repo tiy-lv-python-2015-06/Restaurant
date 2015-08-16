@@ -2,19 +2,18 @@
 {% load bootstrap3 %}
 {% block content %}
 {#   REPLACE THIS IN THE BASE HTML! <h1 class="header">IRONEATS</h1>#}
-    <form action="{% url 'menu' pk=pk%}" method="post" class="form">
     {{ formset.management_form }}
     {% csrf_token %}
-    <ol>
-        {% for form, food in zipped %}
-            {{ food.name }}<br> {{ food.description }} {{ food.category }} {{ food.price }} {{ form.qty }} {{ form.name }}<br><br>
-        {% endfor %}
-    </ol>
-    <input type="submit" value="submit" class="btn btn-danger">
-    {% for form in formset %}
-    {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-    {% endfor %}
-{% endfor %}
-    </form>
+        <ol>
+        {% for food in foods %}
+            <form action="{% url 'order' pk=pk%}" method="post" class="form">
+            {% csrf_token %}
+            {{ food.name }}<br> {{ food.description }} {{ food.category }} {{ food.price }}<br><br>
+            <input type="submit" value='Order This' class="btn btn-danger">
+            </form>
+            {% endfor %}
+         </ol>
+            <form action="{% url 'confirm' pk=pk%}" method="post" class="form">
+            {% csrf_token %}
+            <input type="submit" value='Submit Your Order' class="btn btn-danger">
 {% endblock %}

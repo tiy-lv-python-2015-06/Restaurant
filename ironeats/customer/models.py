@@ -20,10 +20,13 @@ class Customer(models.Model):
 class Order(models.Model):
     restaurant = models.ForeignKey(Restaurant)
     customer = models.ForeignKey(Customer)
-    fooditem = models.ForeignKey(FoodItem, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-
+    submited = models.BooleanField(default=False)
     def __str__(self):
-        return ("Restaurant: {}, Customer: {}, FoodItem: {}, Time: {}".format(
-            self.restaurant, self.customer, self.fooditem, self.timestamp
+        return ("Restaurant: {}, Customer: {}, Time: {}".format(
+            self.restaurant, self.customer, self.timestamp
         ))
+class OrderItem(models.Model):
+    fooditem = models.ForeignKey(FoodItem)
+    order = models.ForeignKey(Customer)
+    quantity = models.IntegerField(default=1)
