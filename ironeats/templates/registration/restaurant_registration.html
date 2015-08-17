@@ -4,7 +4,7 @@
 <body>
         <h1 class="header" style="text-align: center">IRONEATS</h1>
         <h3>New Restaurant Registration</h3>
-    <form action="{%  url 'restaurant_profile' restaurant_id %} method = 'POST'>
+    <form action="{%  url '/register/restaurant/' %}" method = 'POST'>
     {% csrf_token %}
     {{form.as_p}}
     <input type = 'submit' value="Register"/>
