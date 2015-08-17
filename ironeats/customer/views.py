@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from customer.forms import CustomerCreationForm
 from customer.models import Customer
 from django.views.generic import ListView, CreateView
 from customer.models import Order, OrderItem
@@ -85,15 +86,24 @@ class Confirm(ListView):
 
 def createuser(request):
     if request.method == "POST":
-        form = UserForm(request.POST)
+        form = CustomerCreationForm(request.POST)
         if form.is_valid():
-            # user = User.objects.create_user(**form.cleaned_data)
-            # user = authenticate(username=None, password=None)
-            # if request.user.is_authenticated():
-            #     login(request, user)
-            return HttpResponseRedirect('/rest_or_cust')
+            data = form.cleaned_data
+            user = form.save()
+            customer = Customer()
+            customer.user = user
+            customer.address = data['address']
+            customer.city = data['city']
+            customer.state = data['state']
+            customer.zip_code = data['zip_code']
+            customer.phone = data['phone']
+            customer.save()
+
+
+
+            return HttpResponseRedirect(reverse('home'))
     else:
-        form = UserForm()
+        form = CustomerCreationForm()
 
     return render(request, 'registration/customer_registration.html',
                   {'form': form})

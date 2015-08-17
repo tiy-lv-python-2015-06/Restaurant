@@ -1,24 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-{#   REPLACE THIS IN THE BASE HTML! <h1 class="header">IRONEATS</h1>#}
-    <div style='text-align: right'>
-
-{#    <a class="btn btn-danger" href="{% url 'restaurant_profile' restaurant_id %}"> Restaurant Profile </a>#}
-    </div>
-
-{#    OUR HEADER GOES HERE#}
-         <h1 class="header" style="text-align: center">IRONEATS</h1>
-    <P>
-    <ol>
-    <p>
     <ol class="list-group">
         {% for rest in restaurant %}
-            <li class="addy"><a href="{% url 'menu' rest.pk %}" class="rest-name">{{ rest.business_name }}</a><br>
+            <li class="addy list-group-item"><a href="{% url 'menu' rest.pk %}" class="rest-name">{{ rest.business_name }}</a><br>
             {{ rest.address }}, {{ rest.zip_code }},</li><br>
 
         {% endfor %}
     </ol>
-    </p>
     {% if page_obj.has_previous %}
         <a href="{% url 'home' %}?page={{ page_obj.previous_page_number }}"><-Prev</a>
     {% endif %}
@@ -28,5 +16,4 @@
         <a href="{% url 'home' %}?page={{ page_obj.next_page_number }}">Next-></a>
     {% endif %}
 
-    </ol>
 {% endblock %}

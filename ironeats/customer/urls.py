@@ -7,7 +7,7 @@ from customer.views import PlaceOrder
 
 urlpatterns = [
 
-    url(r'^register/customer/', CustomerCreate.as_view(), name='cust_reg'),
+    url(r'^register/customer/', 'customer.views.createuser', name='cust_reg'),
 
     url(r'^(?P<pk>[0-9]+)/', customer.views.menu, name='menu'),
 
