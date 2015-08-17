@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -110,7 +111,9 @@ def createuser(request):
             customer.zip_code = data['zip_code']
             customer.phone = data['phone']
             customer.save()
-
+            user = authenticate(username=request.POST['username'],
+                                    password=request.POST['password1'])
+            login(request, user)
 
 
             return HttpResponseRedirect(reverse('home'))
