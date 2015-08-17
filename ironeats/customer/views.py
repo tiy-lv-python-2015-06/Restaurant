@@ -74,7 +74,8 @@ class Confirm(ListView):
     def get_queryset(self):
         queryset = self.request.user.customer.order_set.all()
         try:
-            current_order = self.request.user.customer.order_set.get(submited=False)
+            current_order = \
+                self.request.user.customer.order_set.get(submited=False)
             current_order.submited = True
             current_order.save()
         except:
