@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1 class="dish" >
-        Name:  &nbsp;{{ fooditem.name }}
-    </h1>
-    <h3 class="description" >
-        Description:  &nbsp;{{ fooditem.description }}
-    </h3>
-    <span class="lead bold">{{ fooditem.name }}</span>
+    <span class="lead bold">Name:  &nbsp;{{ fooditem.name }}</span>
     <br>
-    <span class="description"> {{ fooditem.description }}</span>
+    <span class="description">Description:  &nbsp;{{ fooditem.description }}</span>
     <form method="post" action="{%  url 'order' pk=restaurant.id %}" class="form">
         {% csrf_token %}
         {% for field in form %}

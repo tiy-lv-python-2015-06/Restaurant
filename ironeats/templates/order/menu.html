@@ -9,10 +9,8 @@
             {% for food in foods %}
                 <form action="{% url 'order' pk=food.pk%}" method="post" class="bootstrap form">
                 {% csrf_token %}
-                <span class="lead">{{ food.name }}&nbsp;&nbsp;${{ food.price | floatformat:2 }}</span><br>
+                <span class="lead bold">{{ food.name }}&nbsp;&nbsp;${{ food.price | floatformat:2 }}</span><br>
                     <span class="description">{{ food.description }}</span>
-                    <br>
-                <span class="lead bold">{{ food.name }}</span><br> <span class="description">{{ food.description }}: {{ food.price }}</span>
                     <br><br>
                 <input type="submit" value='Order This' class="btn btn-danger" style="font-size: small">
                 <br><br>
