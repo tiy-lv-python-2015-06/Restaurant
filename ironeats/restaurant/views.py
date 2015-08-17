@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, ListView, \
     CreateView, UpdateView, DeleteView
 from restaurant.forms import RestaurantCreateForm
@@ -12,7 +13,6 @@ class RestaurantProfile(DetailView):
     pk_url_kwarg = 'restaurant_id'
     template_name = 'restaurant/restaurant_profile.html'
 
-
 class OrderList(DetailView):
     model = Restaurant
     pk_url_kwarg = 'restaurant_id'
@@ -22,6 +22,13 @@ class OrderList(DetailView):
 #     model = Restaurant
 #     template_name = "restaurant/order_list.html"
 #     queryset = Restaurant.objects.all().order_by('timestamp')
+
+def login_redirect(request):
+    user =  request.user
+    if hasattr(user, 'restaurant') and user.restaurant.id > 0:
+        return HttpResponseRedirect(reverse('restaurant_profile', args=[user.restaurant.id]))
+    else:
+        return HttpResponseRedirect(reverse('home'))
 
 
 class RestaurantCreate(CreateView):
