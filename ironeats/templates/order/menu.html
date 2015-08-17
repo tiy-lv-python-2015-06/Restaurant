@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
+    <br><br>
     {{ formset.management_form }}
     {% csrf_token %}
-        <ol>
-        {% for food in foods %}
-            <form action="{% url 'order' pk=food.pk%}" method="post" class="form">
-            {% csrf_token %}
-            <p class="dish">{{ food.name }}</p> <p class="description">{{ food.description }}: {{ food.price }}</p>
-            <input type="submit" value='Order This' class="btn btn-danger" style="font-size: small">
-            <br><br>
-            </form>
+    <div class="row">
+        <div class="col-md-8">
+            <ol>
+            {% for food in foods %}
+                <form action="{% url 'order' pk=food.pk%}" method="post" class="bootstrap form">
+                {% csrf_token %}
+                <span class="lead">{{ food.name }}</span><br> <span class="description">{{ food.description }}: {{ food.price }}</span>
+                    <br><br>
+                <input type="submit" value='Order This' class="btn btn-danger" style="font-size: small">
+                <br><br>
+                </form>
+                {% endfor %}
+             </ol>
+        </div>
+        <div class="col-md-4">
+        <h3>Your Current Order:</h3><br>
+        <dl>
+            {% for item in current_order %}
+                <dt> {{ item.fooditem.name }}</dt> <dd>Quantity: {{ item.quantity }}</dd><br>
             {% endfor %}
-         </ol><br><br>
-        <div style="text-align: left">
+        </dl>
+        </div>
+    </div>
+        <div class="container l">
         <a class="btn btn-danger" href="{% url 'confirm' %}" style="font-size: 25px" >  Confirm Your Order </a>
         </div>
     </form>

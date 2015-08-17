@@ -18,10 +18,6 @@ class OrderList(DetailView):
     pk_url_kwarg = 'restaurant_id'
     template_name = 'restaurant/order_list.html'
 
-# class OrderList(ListView):
-#     model = Restaurant
-#     template_name = "restaurant/order_list.html"
-#     queryset = Restaurant.objects.all().order_by('timestamp')
 
 def login_redirect(request):
     user =  request.user

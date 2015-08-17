@@ -33,8 +33,14 @@ class CustomerCreate(CreateView):
 
 def menu(request, pk):
     restaurant = Restaurant.objects.get(pk=pk)
+    current_order = []
+    try:
+        for item in request.user.customer.order_set.get(submited=False).orderitem_set.all():
+            current_order.append(item)
+    except:
+        current_order = []
     return render(request, "order/menu.html",
-                  context={'foods': restaurant.fooditem_set.all(), 'pk': pk})
+                  context={'foods': restaurant.fooditem_set.all(), 'pk': pk, 'current_order': current_order})
 
 
 class PlaceOrder(CreateView):
