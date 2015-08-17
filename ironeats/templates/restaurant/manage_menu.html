@@ -15,15 +15,14 @@
     <a href="{% url 'create_menu' restaurant.id %}">Add a new menu item</a>
         <br><br>
     {% for item in fooditem_list %}
-       <div>
-           <a href="{% url 'update_menu' item.id %}">Edit</a>
-           <a href="{% url 'delete_menu_item' item.id %}">Delete</a></div>
+
         <div>
            <li>{{ item.name }}<br>
-            Price: {{ item.price }}<br>
-            Description: {{ item.description }}<br>
-            Category:  {{ item.category }}<br></li><br>
-        </div>
+            Price: &nbsp;&nbsp; ${{ item.price | floatformat:2 }}<br>
+            Description: &nbsp;&nbsp; {{ item.description }}<br>
+            Category:  &nbsp;&nbsp; {{ item.category }}<br></li>
+           <a href="{% url 'update_menu' item.id %}">Edit</a>
+           <a href="{% url 'delete_menu_item' item.id %}">Delete</a></div><br>
     {% endfor %}
     </ol>
     <center>
