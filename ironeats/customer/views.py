@@ -76,6 +76,8 @@ class Confirm(ListView):
         try:
             current_order = \
                 self.request.user.customer.order_set.get(submited=False)
+            current_order = self.request.user.customer.order_set.get(
+                submited=False)
             current_order.submited = True
             current_order.save()
         except:

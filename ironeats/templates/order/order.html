@@ -1,14 +1,16 @@
-{#   REPLACE THIS IN THE BASE HTML! <h1 class="header">IRONEATS</h1>#}
+{% extends 'base.html' %}
 {% block content %}
-    <h1>How many Foods would you like to order</h1>
+    <h1 class="dish" style="text-align: center">{{ fooditem.name }}</h1>
+    <h2 class="description" style="text-align: center"> {{ fooditem.description }}</h2>
     <form method="post" action="{%  url 'order' pk=restaurant.id %}" class="form">
         {% csrf_token %}
         {% for field in form %}
-            {{ fooditem.name }}<br>
+            {{ fooditem.price }}<br><br>
+            QTY<br>
             {{ field }}
-        <input type="hidden" name="fooditempk" value={{ fooditem.pk }}>
         {% endfor %}
-        <input>
+        <br>
+        <input type="hidden" name="fooditempk" value={{ fooditem.pk }}>
         <input type="submit" value='Order' class="btn btn-danger">
     </form>
 {% endblock %}

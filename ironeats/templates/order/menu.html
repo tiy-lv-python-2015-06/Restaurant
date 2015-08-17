@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
 {% block content %}
-{#   REPLACE THIS IN THE BASE HTML! <h1 class="header">IRONEATS</h1>#}
     {{ formset.management_form }}
     {% csrf_token %}
         <ol>
         {% for food in foods %}
             <form action="{% url 'order' pk=food.pk%}" method="post" class="form">
             {% csrf_token %}
-            {{ food.name }}<br> {{ food.description }} {{ food.category }} {{ food.price }}<br><br>
-            <input type="submit" value='Order This' class="btn btn-danger">
+            <p class="dish">{{ food.name }}</p> <p class="description">{{ food.description }}: {{ food.price }}</p>
+            <input type="submit" value='Order This' class="btn btn-danger" style="font-size: small">
+            <br><br>
             </form>
             {% endfor %}
-         </ol>
-        <a class="btn btn-danger" href="{% url 'confirm' %}">  Confirm Your Order </a>
+         </ol><br><br>
+        <div style="text-align: left">
+        <a class="btn btn-danger" href="{% url 'confirm' %}" style="font-size: 25px" >  Confirm Your Order </a>
+        </div>
     </form>
 {% endblock %}

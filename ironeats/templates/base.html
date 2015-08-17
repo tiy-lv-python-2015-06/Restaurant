@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {% load bootstrap3 %}
 <!DOCTYPE html>
 <html>
@@ -5,13 +6,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
+    <link rel="stylesheet"
+          href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'site-style.css' %}">
     <title>Iron Eats - {% block title %}{% endblock %}</title>
-
 </head>
 <body>
-    <div class="container">
+    <div style='text-align: right'>
+    <a class="btn btn-danger" href="{% url 'rest_login' %}"> Restaurant Login </a>
+    <a class="btn btn-danger" href="{% url 'cust_login' %}"> Customer Login </a>
+    <a class="btn btn-danger" href="{% url 'create_user' %}"> Register </a>
+    <a class="btn btn-danger" href="{% url 'logout' %}"> Logout </a>
+{#    <a class="btn btn-danger" href="{% url 'restaurant_profile' restaurant_id %}"> Restaurant Profile </a>#}
+    </div>
+    <div class="top">
+    <h1 style="text-align: center" class="top">IronEATS</h1>
+    </div>
         {% bootstrap_messages %}
         {% block content %}
         {% endblock %}
