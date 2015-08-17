@@ -27,10 +27,15 @@ class Home(ListView):
 
 class CustomerCreate(CreateView):
     model = Customer
-    fields = ['user', 'address', 'city',
+    fields = ['address', 'city',
               'state', 'zip_code', 'phone']
     template_name = 'registration/customer_registration.html'
     success_url = '/'
+
+    def form_valid(self, form):
+        customer = form.save(commit=False)
+        customer.user = self.request.user
+        return super(CustomerCreate, self).form_valid(form)
 
 
 def menu(request, pk):
