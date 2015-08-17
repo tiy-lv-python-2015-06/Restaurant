@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
-from django.views.generic import DetailView, ListView, CreateView, \
-                                 UpdateView, DeleteView
+from django.views.generic import DetailView, ListView, \
+    CreateView, UpdateView, DeleteView
 from restaurant.models import Restaurant, FoodItem
 
 
@@ -63,7 +63,7 @@ class CreateMenu(CreateView):
     def get_success_url(self):
         return reverse('manage_menu',
                        kwargs={'restaurant_id':
-                              self.kwargs.get('restaurant_id', None)})
+                               self.kwargs.get('restaurant_id', None)})
 
     def get_context_data(self, **kwargs):
         context = super(CreateMenu, self).get_context_data(**kwargs)
@@ -106,7 +106,7 @@ class UpdateMenu(UpdateView):
 
     def get_success_url(self):
         fooditem = FoodItem.objects.get\
-                   (pk=self.kwargs.get('fooditem_id', None))
+            (pk=self.kwargs.get('fooditem_id', None))
         return reverse('manage_menu',
                        kwargs={'restaurant_id': fooditem.restaurant.id})
 
@@ -117,11 +117,11 @@ class DeleteItem(DeleteView):
     template_name = "restaurant/delete_menu_item.html"
 
     def get_success_url(self):
-        fooditem = FoodItem.objects.get(pk=self.kwargs.get('fooditem_id', None))
+        fooditem = FoodItem.objects.get\
+            (pk=self.kwargs.get('fooditem_id', None))
         return reverse('manage_menu',
                        kwargs={'restaurant_id': fooditem.restaurant.id})
 
 
 class DeleteMenu(DeleteView):
     model = FoodItem
-
