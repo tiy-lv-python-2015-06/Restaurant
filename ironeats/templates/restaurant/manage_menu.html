@@ -4,31 +4,31 @@
 {% block title %}Manage Menu{% endblock %}
 
 {% block content %}
-    <h1>Hello "{{ restaurant.business_name }}".  <br>Here is your current menu:</h1>
+    <h1>Hello "{{ user.restaurant.business_name }}".
+        Here is your current menu:</h1>
     <center>
-        <h4><a href="{% url 'restaurant_profile' restaurant.id %}">
+        <h4><a class="btn btn-danger"
+               href="{% url 'restaurant_profile' restaurant.id %}">
                 Go back to my restaurant profile
             </a>
         </h4>
     </center>
     <ol>
-    <a href="{% url 'create_menu' restaurant.id %}">Add a new menu item</a>
-        <br><br>
+    <a class="btn btn-danger"
+       href="{% url 'create_menu' user.restaurant.id %}">Add a new menu item</a>
+        <br><br><br>
     {% for item in fooditem_list %}
-
         <div>
            <li>{{ item.name }}<br>
             Price: &nbsp;&nbsp; ${{ item.price | floatformat:2 }}<br>
             Description: &nbsp;&nbsp; {{ item.description }}<br>
             Category:  &nbsp;&nbsp; {{ item.category }}<br></li>
-           <a href="{% url 'update_menu' item.id %}">Edit</a>
-           <a href="{% url 'delete_menu_item' item.id %}">Delete</a></div><br>
+               <a class="btn btn-danger"
+                  href="{% url 'update_menu' item.id %}">Edit</a>&nbsp;
+               <a class="btn btn-danger"
+                  href="{% url 'delete_menu_item' item.id %}">Delete</a>
+           <br><br>
+        </div>
     {% endfor %}
     </ol>
-    <center>
-        <h4><a href="{% url 'restaurant_profile' restaurant.id %}">
-                Go back to my restaurant profile
-            </a>
-        </h4>
-    </center>
 {% endblock %}

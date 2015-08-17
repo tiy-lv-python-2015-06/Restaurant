@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block content %}
-    <ol class="list-group">
         {% for rest in restaurant %}
-            <li class="addy list-group-item"><a href="{% url 'menu' rest.pk %}" class="rest-name">{{ rest.business_name }}</a><br>
-            {{ rest.address }}, {{ rest.zip_code }},</li><br>
-
+            <span class="lead bold">{{ rest.business_name }}</span><br> <span class="description">{{ rest.address }}: {{ rest.price }}</span>
+            <br>
+            <br>
+            <a class="btn btn-danger" href="{% url 'menu' rest.pk%}"> Eat Here </a>
+            <br><br>
         {% endfor %}
     </ol>
-    {% if page_obj.has_previous %}
-        <a href="{% url 'home' %}?page={{ page_obj.previous_page_number }}"><-Prev</a>
-    {% endif %}
-    {% if page_obj.next_page_number == 1 %} }}
-        {{ page_obj }}
+    <div>
+        <ul class="pager">
+        {% if page_obj.has_previous %}
+            <li class="previous">
+                <a href="{% url 'home' %}?page={{ page_obj.previous_page_number }}">
+                    <span aria-hidden="true">&larr;</span> Previous</a>
+            </li>
+        {% endif %}
         {% if page_obj.has_next %}
-            <a href="{% url 'home' %}?page={{ page_obj.next_page_number }}">Next-></a>
-    {% endif %}
-    {% endif %}
+            <li class="next">
+                <a href="{% url 'home' %}?page={{ page_obj.next_page_number }}">
+                    Next<span aria-hidden="true">&rarr;</span></a>
+            </li>
+        {% endif %}
+        <ul>
+    </div>
 {% endblock %}

@@ -22,7 +22,8 @@ class OrderList(DetailView):
 def login_redirect(request):
     user =  request.user
     if hasattr(user, 'restaurant') and user.restaurant.id > 0:
-        return HttpResponseRedirect(reverse('restaurant_profile', args=[user.restaurant.id]))
+        return HttpResponseRedirect(reverse('restaurant_profile',
+                                            args=[user.restaurant.id]))
     else:
         return HttpResponseRedirect(reverse('home'))
 
@@ -69,7 +70,8 @@ def createrest(request):
                                     password=request.POST['password1'])
             login(request, user)
 
-            return HttpResponseRedirect(reverse('restaurant_profile', args=[user.restaurant.id]))
+            return HttpResponseRedirect(reverse('restaurant_profile',
+                                                args=[user.restaurant.id]))
 
     else:
         form = RestaurantCreateForm()
@@ -143,6 +145,3 @@ class DeleteItem(DeleteView):
         return reverse('manage_menu',
                        kwargs={'restaurant_id': fooditem.restaurant.id})
 
-
-class DeleteMenu(DeleteView):
-    model = FoodItem
