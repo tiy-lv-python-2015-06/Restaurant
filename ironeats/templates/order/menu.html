@@ -13,7 +13,6 @@
             </form>
             {% endfor %}
          </ol>
-            <form action="{% url 'confirm' pk=pk%}" method="post" class="form">
-            {% csrf_token %}
-            <input type="submit" value='Submit Your Order' class="btn btn-danger">
+        <a class="btn btn-danger" href="{% url 'confirm' %}">  Confirm Your Order </a>
+    </form>
 {% endblock %}

@@ -1,9 +1,9 @@
 from django.conf.urls import url
 #
-from customer.views import CustomerCreate
+from customer.views import CustomerCreate, Confirm
 
 import customer
-from customer.views import PlaceOrder, Confirm
+from customer.views import PlaceOrder
 
 urlpatterns = [
 
@@ -13,6 +13,6 @@ urlpatterns = [
 
     url(r'^order/(?P<pk>[0-9]+)/', PlaceOrder.as_view(), name='order'),
 
-    url(r'^confirm/(?P<pk>[0-9]+)/', Confirm.as_view(), name='confirm'),
+    url(r'^confirm/', Confirm.as_view(), name='confirm'),
 
 ]

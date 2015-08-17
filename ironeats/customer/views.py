@@ -44,7 +44,7 @@ class PlaceOrder(CreateView):
     template_name = "order/order.html"
 
     def get_success_url(self):
-        return reverse('menu', kwargs={'pk': self.kwags.get('pk', None)})
+        return reverse('menu', kwargs={'pk': self.kwargs.get('pk', None)})
 
     def get_context_data(self, **kwargs):
         context = super(PlaceOrder, self).get_context_data(**kwargs)
@@ -57,7 +57,7 @@ class PlaceOrder(CreateView):
         fooditem = FoodItem.objects.get(pk=self.request.POST.get('fooditempk'))
         form.instance.fooditem = fooditem
         try:
-            order = self.request.user.customer.order.get(submited=False)
+            order = self.request.user.customer.order_set.get(submited=False)
             form.instance.order = order
             form.instance.order.save()
         except:
@@ -71,10 +71,16 @@ class PlaceOrder(CreateView):
 class Confirm(ListView):
     model = Order
     template_name = "order/confirm.html"
-    # queryset = Order.objects.orderitems_set.all()
-    context_object_name = 'order'
-
-    context_object_name = 'order'
+    context_object_name = 'orders'
+    def get_queryset(self):
+        queryset = self.request.user.customer.order_set.all()
+        try:
+            current_order = self.request.user.customer.order_set.get(submited=False)
+            current_order.submited = True
+            current_order.save()
+        except:
+            pass
+        return queryset[::-1]
 
 
 def createuser(request):
