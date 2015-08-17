@@ -39,17 +39,18 @@ class RestaurantCreateForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2',)
+        fields = ('username', 'business_name', 'address',
+                  'city', 'state', 'zip_code', 'phone_number')
 
-    def save(self, commit=True):
-        user = super(RestaurantCreateForm, self).save(commit=False)
-        user.restaurant.business_name = self.cleaned_data['business_name']
-        # user.email = self.cleaned_data['email']
-        user.restaurant.address = self.cleaned_data['address']
-        user.restaurant.city = self.cleaned_data['city']
-        user.restaurant.state = self.cleaned_data['state']
-        user.restaurant.zip_code = self.cleaned_data['zip_code']
-        user.restaurant.phone_number = self.cleaned_data['phone_number']
-        if commit:
-            user.save()
-        return user
+    # def save(self, commit=True):
+    #     user = super(RestaurantCreateForm, self).save(commit=False)
+    #     user.restaurant.business_name = self.cleaned_data['business_name']
+    #     # user.email = self.cleaned_data['email']
+    #     user.restaurant.address = self.cleaned_data['address']
+    #     user.restaurant.city = self.cleaned_data['city']
+    #     user.restaurant.state = self.cleaned_data['state']
+    #     user.restaurant.zip_code = self.cleaned_data['zip_code']
+    #     user.restaurant.phone_number = self.cleaned_data['phone_number']
+    #     if commit:
+    #         user.save()
+    #     return user

@@ -54,32 +54,29 @@ class RestaurantCreate(CreateView):
         return context
 
 
-#
-#     def form_valid(self, form):
-#         self.object = form.save()
-#         return super(RestaurantCreate, self).form_valid(form)
-
-def restaurantregister(request):
+def createrest(request):
     if request.method == 'POST':
         form = RestaurantCreateForm(request.POST)
-
         if form.is_valid():
-            rest_user = RestaurantCreateForm(request.POST)
-            rest_user.save()
-            return render(request, 'restaurant/restaurant_profile.html')
+            data = form.cleaned_data
+            user = form.save()
+            restaurant = Restaurant()
+            restaurant.user = user
+            restaurant.business_name = data['business_name']
+            restaurant.address = data['address']
+            restaurant.city = data['city']
+            restaurant.state = data['state']
+            restaurant.zip_code = data['zip_code']
+            restaurant.phone_number = data['phone_number']
+            restaurant.save()
+
+            return HttpResponseRedirect(reverse('restaurant_profile', args=[user.restaurant.id]))
+
     else:
         form = RestaurantCreateForm()
-    return render('registration/restaurant_registration.html',
-                              {'form': form},
-                              context_instance=RequestContext(request))
 
-class CreateRestaurant(CreateView):
-    form_class = RestaurantCreateForm
-    template_name = 'registration/restaurant_registration.html'
-
-    def get_success_url(self):
-                return reverse('restaurant_profile',
-                       kwargs={'restaurant_id': self.request.user.restaurant.restaurant.id})
+    return render(request, 'registration/restaurant_registration.html',
+                  {'form': form})
 
 
 
