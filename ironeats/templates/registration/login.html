@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block content %}
-       <div style='text-align: right'>
+       <div style='text-align: center'>
            <a class="btn btn-danger" href="{% url 'rest_reg' %}"> Restaurant Registration </a>
     <a class="btn btn-danger" href="{% url 'cust_reg' %}"> Customer Registration </a>
-       </div>
-
-    <h1 class="header" style="text-align: center">IRONEATS</h1>
-    <h3>Please Login</h3>
-    <form method="post" action="{% url 'login' %}">
+       </div><br>
+    <h2 class="title">Please Login</h2>
+    <form method="post" action="{% url 'login' %}" class="login">
     {{  formset.management_form }}
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ next }}">
@@ -18,7 +16,8 @@
 
     </form>
 
-
+    <div style="text-align: center">
     <a href="{% url 'password_reset' %}">forgot password?</a>
+    </div>
 
 {% endblock %}
