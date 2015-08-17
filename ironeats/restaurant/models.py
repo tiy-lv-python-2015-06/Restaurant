@@ -13,8 +13,7 @@ class Restaurant(models.Model):
     user = models.OneToOneField(User)
 
     def has_menu(self):
-        menu_exists = (FoodItem.objects.get
-                       (pk=self.user.restaurant.id) is not None)
+        menu_exists = (self.user.restaurant.fooditem_set.count() > 0)
         return menu_exists
 
     def get_menu_items(self):

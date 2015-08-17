@@ -5,28 +5,29 @@
 
 {% block content %}
     {% csrf_token %}
-    <h1>Hi, welcome to your restaurant profile account:</h1>
-    <h3>{{ restaurant.business_name }}:</h3>
-    <style type="text/css">
-
+    <h1>Hi {{ restaurant.business_name }}, welcome to your restaurant profile:</h1>
+        <style type="text/css">
             .tab { margin-left: 40px; }
             .tab2 { margin-left: 100px; }
 
-    </style>
+        </style>
     <br>
     <h3><p class="tab">ORDERS:</p></h3>
     <h4><p class="tab2">
-        <a href="{% url 'order_list' user.restaurant.id %}">
+        <a class="btn btn-danger"
+           href="{% url 'order_list' user.restaurant.id %}">
             Click here to view current orders</a><br>
     </p></h4>
     <h3><p class="tab">MENU:</p></h3>
     <h4><p class="tab2">
         {% if user.restaurant.has_menu %}
-            <a href="{% url 'manage_menu' user.restaurant.id %}">
+            <a class="btn btn-danger"
+               href="{% url 'manage_menu' user.restaurant.id %}">
                 Manage Menu
             </a>
         {% else %}
-            <a href="{% url 'create_menu' user.restaurant.id %}">
+            <a class="btn btn-danger"
+               href="{% url 'create_menu' user.restaurant.id %}">
                 Create Menu
             </a>
         {% endif %}
