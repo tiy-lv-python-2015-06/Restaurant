@@ -3,8 +3,11 @@
 {% block content %}
          <h1 class="header" style="text-align: center">IRONEATS</h1>
     <ol>
-        {% for food in order %}
-            <li>{{ food.name }}  {{ food.price }}</li><br>
+        {% for order in orders %}
+            <li>{% for food in order.orderitem_set.all %}
+            {{ food.fooditem.name }}  {{ food.fooditem.price }}<br>
+            {% endfor %}
+            </li><br></r>
         {% endfor %}
     </ol>
     <p> Thank You For Your Order</p>
