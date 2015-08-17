@@ -1,7 +1,6 @@
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, CreateView, \
                                  UpdateView, DeleteView
-from customer.models import Order
 from restaurant.models import Restaurant, FoodItem
 
 
@@ -33,6 +32,8 @@ class RestaurantCreate(CreateView):
         context = super(RestaurantCreate, self).get_context_data(**kwargs)
         context['restaurant_id'] = self.request.user.restaurant.id
         return context
+
+
 #
 #     def form_valid(self, form):
 #         self.object = form.save()
