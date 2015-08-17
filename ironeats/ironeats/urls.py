@@ -4,8 +4,11 @@ from django.views.generic import TemplateView
 import customer
 from customer.views import Home
 from django.contrib.auth import views as auth_views
+import restaurant
+from restaurant.views import RestaurantCreate
 
 urlpatterns = [
+    url(r'^register/restaurant', 'restaurant.views.createrest', name='rest_reg'),
     url(r'^logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^login_redirect/', 'restaurant.views.login_redirect', name='login_redirect'),
     url(r'^', include('django.contrib.auth.urls')),
@@ -19,6 +22,7 @@ urlpatterns = [
         {'extra_context': {'next': '/'}}, name='rlogin'),
     url(r'^register/', customer.views.createuser, name='create_user'),
 
+    # url(r'^register/$', customer.views.createuser, name='create_user'),
 
 
 ]

@@ -1,7 +1,10 @@
+from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, ListView, \
     CreateView, UpdateView, DeleteView
+from restaurant.forms import RestaurantCreateForm
 from restaurant.models import Restaurant, FoodItem
 
 
@@ -29,7 +32,7 @@ class RestaurantCreate(CreateView):
     fields = ['business_name', 'email', 'address', 'city',
               'state', 'zip_code', 'phone_number']
     template_name = 'registration/restaurant_registration.html'
-    # success_url = '/'
+
 
     def get_success_url(self):
        return reverse('restaurant/restaurant_profile/',
@@ -47,30 +50,38 @@ class RestaurantCreate(CreateView):
         return context
 
 
-#
-#     def form_valid(self, form):
-#         self.object = form.save()
-#         return super(RestaurantCreate, self).form_valid(form)
+def createrest(request):
+    if request.method == 'POST':
+        form = RestaurantCreateForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            user = form.save()
+            restaurant = Restaurant()
+            restaurant.user = user
+            restaurant.business_name = data['business_name']
+            restaurant.address = data['address']
+            restaurant.city = data['city']
+            restaurant.state = data['state']
+            restaurant.zip_code = data['zip_code']
+            restaurant.phone_number = data['phone_number']
+            restaurant.save()
+            user = authenticate(username=request.POST['username'],
+                                    password=request.POST['password1'])
+            login(request, user)
 
-# def restaurantregister(request):
-#     if request.method == 'POST':
-#         form = RestaurantCreateForm(request.POST)
-#
-#         if form.is_valid():
-#             rest_user = RestaurantCreateForm(request.POST)
-#             rest_user.save()
-#             return render_to_response('restaurant/restaurant_profile.html')
-#     else:
-#         form = RestaurantCreateForm()
-#     return render_to_response('registration/restaurant_registration.html',
-#                               {'form': form},
-#                               context_instance=RequestContext(request))
+            return HttpResponseRedirect(reverse('restaurant_profile', args=[user.restaurant.id]))
+
+    else:
+        form = RestaurantCreateForm()
+
+    return render(request, 'registration/restaurant_registration.html',
+                  {'form': form})
+
 
 
 class CreateMenu(CreateView):
     model = FoodItem
     fields = ('name', 'price', 'description', 'category', )
-    # success_url = reverse_lazy('manage_menu')
     template_name = "restaurant/create_menu.html"
 
     def get_success_url(self):
@@ -84,9 +95,7 @@ class CreateMenu(CreateView):
         return context
 
     def form_valid(self, form):
-        # form.instance.restaurant_id = self.request.user.restaurant.id
         form.instance.restaurant_id = self.kwargs.get('restaurant_id', None)
-        # form.instance.movie_id = self.kwargs.get('movie_id', None)
         form.instance.name = form.cleaned_data.get('name', None)
         form.instance.price = form.cleaned_data.get('price', None)
         form.instance.description = form.cleaned_data.get('description', None)
@@ -97,7 +106,6 @@ class CreateMenu(CreateView):
 class ManageMenu(ListView):
     model = FoodItem
     template_name = "restaurant/manage_menu.html"
-    # paginate_by = 10
 
     def get_queryset(self):
         queryset = Restaurant.objects.get(

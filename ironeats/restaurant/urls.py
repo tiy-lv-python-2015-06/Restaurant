@@ -17,7 +17,7 @@ urlpatterns = [
 
     # url(r'^order_list/', OrderList.as_view(), name='order_list'),
 
-    url(r'^register/restaurant/', RestaurantCreate.as_view(), name='rest_reg'),
+    # url(r'^register/restaurant', restaurant.views.restaurantregister, name='rest_reg'),
 
     url(r'^order_list/(?P<restaurant_id>[0-9]+)',
         OrderList.as_view(), name='order_list'),
