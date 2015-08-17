@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
         {% for rest in restaurant %}
-            <span class="lead bold">{{ rest.business_name }}</span><br> <span class="description">{{ rest.address }}: {{ rest.price }}</span>
+            <span class="lead bold">{{ rest.business_name }}</span><br> <span class="description">{{ rest.address }}: {{ rest.phone_number }}</span>
             <br>
             <br>
             <a class="btn btn-danger" href="{% url 'menu' rest.pk%}"> Eat Here </a>
