@@ -2,7 +2,8 @@
 {% load bootstrap3 %}
 {% block content %}
 <body>
-        <h2>Register</h2>
+        <h1 class="header" style="text-align: center">IRONEATS</h1>
+        <h3>New Restaurant Registration</h3>
     <form action = '' method = 'POST'>
     {% csrf_token %}
     {{form.as_p}}
