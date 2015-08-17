@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^restaurant_profile/(?P<restaurant_id>[0-9]+)/',
         RestaurantProfile.as_view(), name='restaurant_profile'),
 
-    url(r'^order_list/', OrderList.as_view(), name='order_list'),
+    # url(r'^order_list/', OrderList.as_view(), name='order_list'),
 
     url(r'^register/restaurant/', RestaurantCreate.as_view(), name='rest_reg'),
 
@@ -33,5 +33,6 @@ urlpatterns = [
 
     url(r'^manage_menu/(?P<restaurant_id>[0-9]+)',
         ManageMenu.as_view(), name='manage_menu'),
+
 ]
 
