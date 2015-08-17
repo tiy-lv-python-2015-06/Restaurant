@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+
+        <h1 class="header" style="text-align: center">Please Select One</h1>
+       <div style='text-align: center'>
+
+           <a class="btn btn-danger" href="{% url 'rest_reg' %}"> Restaurant Registration </a>
+           <a class="btn btn-danger" href="{% url 'cust_reg' %}"> Customer Registration </a>
+
+       </div>
+
+{% endblock %}

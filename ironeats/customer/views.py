@@ -1,13 +1,5 @@
-from django.core.urlresolvers import reverse_lazy, reverse
-from django.forms import inlineformset_factory
-from django.http import HttpResponse
-from django.shortcuts import render, render_to_response
-
-# Create your views here.
-from django.views.generic import ListView, CreateView, UpdateView
-from django.contrib.auth import login
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from customer.models import Customer
@@ -78,6 +70,7 @@ class Confirm(ListView):
     model = Order
     template_name = "order/confirm.html"
     context_object_name = 'orders'
+
     def get_queryset(self):
         queryset = self.request.user.customer.order_set.all()
         try:
@@ -93,11 +86,11 @@ def createuser(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(**form.cleaned_data)
+            # user = User.objects.create_user(**form.cleaned_data)
             # user = authenticate(username=None, password=None)
             # if request.user.is_authenticated():
             #     login(request, user)
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/rest_or_cust')
     else:
         form = UserForm()
 

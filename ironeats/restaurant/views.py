@@ -18,7 +18,7 @@ class OrderList(DetailView):
 
 class RestaurantCreate(CreateView):
     model = Restaurant
-    fields = ['user', 'business_name', 'email', 'address', 'city',
+    fields = ['business_name', 'email', 'address', 'city',
               'state', 'zip_code', 'phone_number']
     template_name = 'registration/restaurant_registration.html'
     success_url = 'restaurant/restaurant_profile/'
@@ -30,7 +30,7 @@ class RestaurantCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(RestaurantCreate, self).get_context_data(**kwargs)
-        context['restaurant_id'] = self.request.user.restaurant.id
+        context['user'] = self.request.user.restaurant.id
         return context
 
 
