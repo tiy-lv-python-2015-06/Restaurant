@@ -21,7 +21,12 @@ class RestaurantCreate(CreateView):
     fields = ['business_name', 'email', 'address', 'city',
               'state', 'zip_code', 'phone_number']
     template_name = 'registration/restaurant_registration.html'
-    success_url = 'restaurant/restaurant_profile/'
+    # success_url = 'restaurant/restaurant_profile/'
+
+    def get_success_url(self):
+       return reverse('restaurant/restaurant_profile/',
+                      kwargs={'restaurant':
+                             self.kwargs.get('restaurant_id', None)})
 
     def form_valid(self, form):
         restaurant = form.save(commit=False)
