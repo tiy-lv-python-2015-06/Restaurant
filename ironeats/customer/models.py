@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 from restaurant.models import Restaurant, FoodItem
 
@@ -32,4 +33,4 @@ class Order(models.Model):
 class OrderItem(models.Model):
     fooditem = models.ForeignKey(FoodItem)
     order = models.ForeignKey(Order)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(validators=[MinValueValidator(1)], blank=False)
