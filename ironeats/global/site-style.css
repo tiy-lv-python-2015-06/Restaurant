@@ -1,8 +1,42 @@
 body {
-    background-color: darkblue;
+    background-color: #761c19;
 }
 
-h1 {
-    color: navy;
+.list-group {
+    text-align: center;
+    color: firebrick;
+}
+
+.top{
+    color: lightgray;
+    background: darkred;
+    font-size: 70px;
     margin: 30px;
+    font-weight: bolder;
+}
+
+.rest-name{
+    font-size: 40px;
+    text-align: center;
+
+}
+
+.addy{
+    font-size: 20px;
+    color: #080808;
+}
+
+.form {
+    text-align: center;
+    color: firebrick;
+}
+.dish {
+    font-weight: bold;
+       color: black;
+    font-size: 30px;
+}
+
+.description{
+    color: firebrick;
+    font-size: 20px;
 }

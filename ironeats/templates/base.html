@@ -12,8 +12,15 @@
     <title>Iron Eats - {% block title %}{% endblock %}</title>
 </head>
 <body>
-    <div class="header" style="text-align: center">
-    <h1 class="header">IRONEATS</h1>
+    <div style='text-align: right'>
+    <a class="btn btn-danger" href="{% url 'rest_login' %}"> Restaurant Login </a>
+    <a class="btn btn-danger" href="{% url 'cust_login' %}"> Customer Login </a>
+    <a class="btn btn-danger" href="{% url 'create_user' %}"> Register </a>
+    <a class="btn btn-danger" href="{% url 'logout' %}"> Logout </a>
+{#    <a class="btn btn-danger" href="{% url 'restaurant_profile' restaurant_id %}"> Restaurant Profile </a>#}
+    </div>
+    <div class="top">
+    <h1 style="text-align: center" class="top">IronEATS</h1>
     </div>
         {% bootstrap_messages %}
         {% block content %}

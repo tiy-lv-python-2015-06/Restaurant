@@ -1,20 +1,9 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
 {% block content %}
-    <div style='text-align: right'>
-    <a class="btn btn-danger" href="{% url 'rest_login' %}"> Restaurant Login </a>
-    <a class="btn btn-danger" href="{% url 'cust_login' %}"> Customer Login </a>
-    <a class="btn btn-danger" href="{% url 'create_user' %}"> Register </a>
-    <a class="btn btn-danger" href="{% url 'logout' %}"> Logout </a>
-{#    <a class="btn btn-danger" href="{% url 'restaurant_profile' restaurant_id %}"> Restaurant Profile </a>#}
-    </div>
-
-{#    OUR HEADER GOES HERE#}
-         <h1 class="header" style="text-align: center">IRONEATS</h1>
-    <P>
-    <ol>
+    <p>
+    <ol class="list-group">
         {% for rest in restaurant %}
-            <li><a href="{% url 'menu' rest.pk %}">{{ rest.business_name }}</a></li>
+            <li class="addy"><a href="{% url 'menu' rest.pk %}" class="rest-name">{{ rest.business_name }}</a><br>
             {{ rest.address }}, {{ rest.zip_code }},</li><br>
 
         {% endfor %}
@@ -31,6 +20,3 @@
 
     </ol>
 {% endblock %}
-
-{#TODO# fix link to actual login pages, alight to top right. add header to base
-html, add classes, stylize forms. add block content to the content}
