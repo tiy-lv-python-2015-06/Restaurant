@@ -33,7 +33,7 @@
         {% else %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
             {% if user.restaurant %}
-                <li><a href="{% url 'restaurant_profile' restaurant_id%}">Profile</a></li>
+                <li><a href="{% url 'restaurant_profile' user.restaurant.id%}">Profile</a></li>
                 </ul>
             {% endif %}
         {% endif %}
@@ -42,6 +42,7 @@
       </nav>
     </div>
     <div class="container">
+    <br>
         {% bootstrap_messages %}
         {% block content %}
         {% endblock %}

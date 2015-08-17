@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-    <ol class="list-group">
         {% for rest in restaurant %}
-            <li class="addy list-group-item">{{ rest.business_name }}<br>
-            {{ rest.address }}, {{ rest.zip_code }},<br>
-            <a class="btn btn-danger" href="{% url 'menu' rest.pk%}"> Eat Here </a></li>
+            <span class="lead bold">{{ rest.business_name }}</span><br> <span class="description">{{ rest.address }}: {{ rest.price }}</span>
             <br>
+            <br>
+            <a class="btn btn-danger" href="{% url 'menu' rest.pk%}"> Eat Here </a>
+            <br><br>
         {% endfor %}
     </ol>
     {% if page_obj.has_previous %}

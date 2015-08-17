@@ -80,22 +80,18 @@ class Confirm(ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        queryset = self.request.user.customer.order_set.all()
+        current_order = []
         try:
-            current_order = \
-                self.request.user.customer.order_set.get(submited=False)
-            current_order.submited = True
-            current_order.save()
+            for item in self.request.user.customer.order_set.get(submited=False).orderitem_set.all():
+                current_order.append(item)
+            order = self.request.user.customer.order_set.get(submited=False)
+            order.submited = True
+            order.save()
         except:
-            pass
-        return queryset[::-1]
+            current_order = None
+        queryset = current_order
+        return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super(PlaceOrder, self).get_context_data(**kwargs)
-        fooditem = self.kwargs.get('pk')
-        context['restaurant'] = FoodItem.objects.get(pk=fooditem).restaurant
-        context['fooditem'] = FoodItem.objects.get(pk=fooditem)
-        return context
 
 def createuser(request):
     if request.method == "POST":

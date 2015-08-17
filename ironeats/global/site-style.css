@@ -16,6 +16,9 @@ header h1{
     border-left: 1px solid black;
 }
 
+.bold{
+    font-weight: bold;
+}
 /*.top{*/
     /*color: lightgray;*/
     /*background: darkred;*/

@@ -1,16 +1,11 @@
-
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block content %}
     <h2 class="title">Your Recent Orders</h2>
-    <ol>
-        {% for order in orders %}
-            <li>{% for food in order.orderitem_set.all %}
-            <p class="dish">{{ food.fooditem.name }}</p>
-                <p class="description">{{food.fooditem.price}}</p>
+            {% for orderitem in orders %}
+            {{ orderitem.fooditem.name }}
+            {{ orderitem.fooditem.price }}
             {% endfor %}
-            </li><br></r>
-        {% endfor %}
-    </ol>
+            <br>
     <p><h3 class="thanks">Thank You For Your Order </h3></p>
 {% endblock %}
