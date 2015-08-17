@@ -89,6 +89,12 @@ class Confirm(ListView):
             pass
         return queryset[::-1]
 
+    def get_context_data(self, **kwargs):
+        context = super(PlaceOrder, self).get_context_data(**kwargs)
+        fooditem = self.kwargs.get('pk')
+        context['restaurant'] = FoodItem.objects.get(pk=fooditem).restaurant
+        context['fooditem'] = FoodItem.objects.get(pk=fooditem)
+        return context
 
 def createuser(request):
     if request.method == "POST":
