@@ -1,6 +1,9 @@
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
+from django.template import RequestContext
 from django.views.generic import DetailView, ListView, \
     CreateView, UpdateView, DeleteView
+from restaurant.forms import RestaurantCreateForm
 from restaurant.models import Restaurant, FoodItem
 
 
@@ -49,19 +52,28 @@ class RestaurantCreate(CreateView):
 #         self.object = form.save()
 #         return super(RestaurantCreate, self).form_valid(form)
 
-# def restaurantregister(request):
-#     if request.method == 'POST':
-#         form = RestaurantCreateForm(request.POST)
-#
-#         if form.is_valid():
-#             rest_user = RestaurantCreateForm(request.POST)
-#             rest_user.save()
-#             return render_to_response('restaurant/restaurant_profile.html')
-#     else:
-#         form = RestaurantCreateForm()
-#     return render_to_response('registration/restaurant_registration.html',
-#                               {'form': form},
-#                               context_instance=RequestContext(request))
+def restaurantregister(request):
+    if request.method == 'POST':
+        form = RestaurantCreateForm(request.POST)
+
+        if form.is_valid():
+            rest_user = RestaurantCreateForm(request.POST)
+            rest_user.save()
+            return render(request, 'restaurant/restaurant_profile.html')
+    else:
+        form = RestaurantCreateForm()
+    return render('registration/restaurant_registration.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
+
+class CreateRestaurant(CreateView):
+    form_class = RestaurantCreateForm
+    template_name = 'registration/restaurant_registration.html'
+
+    def get_success_url(self):
+                return reverse('restaurant_profile',
+                       kwargs={'restaurant_id': self.request.user.restaurant.restaurant.id})
+
 
 
 class CreateMenu(CreateView):

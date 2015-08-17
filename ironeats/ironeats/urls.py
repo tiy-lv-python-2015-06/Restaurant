@@ -4,9 +4,11 @@ from django.views.generic import TemplateView
 import customer
 from customer.views import Home
 from django.contrib.auth import views as auth_views
+import restaurant
+from restaurant.views import CreateRestaurant
 
 urlpatterns = [
-
+    url(r'^register/restaurant', CreateRestaurant.as_view(), name='rest_reg'),
     url(r'^', include('django.contrib.auth.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
@@ -23,9 +25,10 @@ urlpatterns = [
     url(r'restaurant/login/', auth_views.login,
         {'extra_context': {'next': '/'}}, name='rlogin'),
 
-    url(r'^register/', customer.views.createuser, name='create_user'),
+    # url(r'^register/$', customer.views.createuser, name='create_user'),
 
     url(r'^logout/', auth_views.logout, {'extra_context':
                                          {'next': '/'}}, name='logout'),
+
 
 ]
