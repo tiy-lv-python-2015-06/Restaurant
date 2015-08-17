@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block content %}
+       <div style='text-align: right'>
+           <a class="btn btn-danger" href="{% url 'rest_reg' %}"> Restaurant Registration </a>
+    <a class="btn btn-danger" href="{% url 'cust_reg' %}"> Customer Registration </a>
+       </div>
 
-<body>
     <h1 class="header" style="text-align: center">IRONEATS</h1>
     <h3>Please Login</h3>
     <form method="post" action="{% url 'login' %}">
@@ -11,11 +14,11 @@
     <input type="hidden" name="next" value="{{ next }}">
     {{ form.as_p }}
     <input type="submit" value="Login">
+
+
     </form>
 
 
     <a href="{% url 'password_reset' %}">forgot password?</a>
-    <a href="{% url 'rest_reg' %}">Restaurant Sign up</a>
-    <a href="{% url 'cust_reg' %}">Customer Sign up</a>
-</body>
+
 {% endblock %}

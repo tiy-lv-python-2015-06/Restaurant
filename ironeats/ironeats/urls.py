@@ -24,4 +24,7 @@ urlpatterns = [
 
     url(r'^register/', customer.views.createuser, name='create_user'),
 
+    url(r'^logout/', auth_views.logout, {'extra_context':
+                                         {'next': '/'}}, name='logout'),
+
 ]

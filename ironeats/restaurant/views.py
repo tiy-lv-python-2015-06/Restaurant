@@ -22,7 +22,7 @@ class RestaurantCreate(CreateView):
     fields = ['user', 'business_name', 'email', 'address', 'city',
               'state', 'zip_code', 'phone_number']
     template_name = 'registration/restaurant_registration.html'
-    success_url = 'restaurant_profile'
+    success_url = 'restaurant/restaurant_profile/'
 #
 #     def form_valid(self, form):
 #         self.object = form.save()
