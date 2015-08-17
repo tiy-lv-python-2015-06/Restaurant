@@ -22,7 +22,7 @@
            <li>{{ item.name }}<br>
             Price: &nbsp;&nbsp; ${{ item.price | floatformat:2 }}<br>
             Description: &nbsp;&nbsp; {{ item.description }}<br>
-            Category:  &nbsp;&nbsp; {{ item.category }}<br></li>
+{#            Category:  &nbsp;&nbsp; {{ item.category }}<br></li>#}
                <a class="btn btn-danger"
                   href="{% url 'update_menu' item.id %}">Edit</a>&nbsp;
                <a class="btn btn-danger"
