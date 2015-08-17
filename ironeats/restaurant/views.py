@@ -27,16 +27,16 @@ class RestaurantCreate(CreateView):
        return reverse('restaurant/restaurant_profile/',
                       kwargs={'restaurant':
                              self.kwargs.get('restaurant_id', None)})
-    #
-    # def form_valid(self, form):
-    #     restaurant = form.save(commit=False)
-    #     restaurant.user = self.request.user
-    #     return super(RestaurantCreate, self).form_valid(form)
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super(RestaurantCreate, self).get_context_data(**kwargs)
-    #     context['user'] = self.request.user.restaurant.id
-    #     return context
+
+    def form_valid(self, form):
+        restaurant = form.save(commit=False)
+        restaurant.user = self.request.user
+        return super(RestaurantCreate, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(RestaurantCreate, self).get_context_data(**kwargs)
+        context['user'] = self.request.user.restaurant.id
+        return context
 
 
 #
