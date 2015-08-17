@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -16,7 +17,7 @@ class Home(ListView):
     template_name = "home.html"
     queryset = Restaurant.objects.all()
     context_object_name = 'restaurant'
-    paginate_by = 20
+    paginate_by = 10
 
 
 class CustomerCreate(CreateView):

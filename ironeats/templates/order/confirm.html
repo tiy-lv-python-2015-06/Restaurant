@@ -7,7 +7,7 @@
         {% for order in orders %}
             <li>{% for food in order.orderitem_set.all %}
             <p class="dish">{{ food.fooditem.name }}</p>
-                <p class="description">{{food.fooditem.price}}</p>
+                <p class="description">{{food.fooditem.price | floatformat:2}}</p>
             {% endfor %}
             </li><br></r>
         {% endfor %}
