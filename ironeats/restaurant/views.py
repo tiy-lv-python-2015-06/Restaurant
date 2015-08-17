@@ -23,6 +23,11 @@ class RestaurantCreate(CreateView):
               'state', 'zip_code', 'phone_number']
     template_name = 'registration/restaurant_registration.html'
     success_url = 'restaurant/restaurant_profile/'
+
+    def get_context_data(self, **kwargs):
+        context = super(RestaurantCreate, self).get_context_data(**kwargs)
+        context['restaurant_id'] = self.request.user.restaurant.id
+        return context
 #
 #     def form_valid(self, form):
 #         self.object = form.save()
