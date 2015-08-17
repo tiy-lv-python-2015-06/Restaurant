@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {% load bootstrap3 %}
 <!DOCTYPE html>
 <html>
@@ -5,13 +6,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'site-style.css' %}">
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <title>Iron Eats - {% block title %}{% endblock %}</title>
-
 </head>
 <body>
-    <div class="container">
+    <div class="header" style="text-align: center">
+<h1 class="header">IRONEATS</h1>
+    </div>
         {% bootstrap_messages %}
         {% block content %}
         {% endblock %}
