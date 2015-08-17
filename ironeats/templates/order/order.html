@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1 class="dish" style="text-align: center">{{ fooditem.name }}</h1>
-    <h2 class="description" style="text-align: center"> {{ fooditem.description }}</h2>
+    <h1 class="dish" >
+        Name:  &nbsp;{{ fooditem.name }}
+    </h1>
+    <h3 class="description" >
+        Description:  &nbsp;{{ fooditem.description }}
+    </h3>
     <form method="post" action="{%  url 'order' pk=restaurant.id %}" class="form">
         {% csrf_token %}
         {% for field in form %}

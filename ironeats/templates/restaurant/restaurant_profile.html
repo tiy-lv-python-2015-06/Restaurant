@@ -16,18 +16,17 @@
     <br>
     <h3><p class="tab">ORDERS:</p></h3>
     <h4><p class="tab2">
-        <a href="{% url 'order_list' restaurant.id %}">
+        <a href="{% url 'order_list' user.restaurant.id %}">
             Click here to view current orders</a><br>
-{#        View past orders<br>#}
     </p></h4>
     <h3><p class="tab">MENU:</p></h3>
     <h4><p class="tab2">
-        {% if restaurant.has_menu %}
-            <a href="{% url 'manage_menu' restaurant.id %}">
+        {% if user.restaurant.has_menu %}
+            <a href="{% url 'manage_menu' user.restaurant.id %}">
                 Manage Menu
             </a>
         {% else %}
-            <a href="{% url 'create_menu' restaurant.id %}">
+            <a href="{% url 'create_menu' user.restaurant.id %}">
                 Create Menu
             </a>
         {% endif %}
