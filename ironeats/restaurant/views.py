@@ -13,6 +13,7 @@ class RestaurantProfile(DetailView):
     pk_url_kwarg = 'restaurant_id'
     template_name = 'restaurant/restaurant_profile.html'
 
+
 class OrderList(DetailView):
     model = Restaurant
     pk_url_kwarg = 'restaurant_id'
@@ -33,7 +34,6 @@ class RestaurantCreate(CreateView):
     fields = ['business_name', 'email', 'address', 'city',
               'state', 'zip_code', 'phone_number']
     template_name = 'registration/restaurant_registration.html'
-
 
     def get_success_url(self):
        return reverse('restaurant/restaurant_profile/',
@@ -67,7 +67,7 @@ def createrest(request):
             restaurant.phone_number = data['phone_number']
             restaurant.save()
             user = authenticate(username=request.POST['username'],
-                                    password=request.POST['password1'])
+                                password=request.POST['password1'])
             login(request, user)
 
             return HttpResponseRedirect(reverse('restaurant_profile',
@@ -78,7 +78,6 @@ def createrest(request):
 
     return render(request, 'registration/restaurant_registration.html',
                   {'form': form})
-
 
 
 class CreateMenu(CreateView):
@@ -144,4 +143,3 @@ class DeleteItem(DeleteView):
             (pk=self.kwargs.get('fooditem_id', None))
         return reverse('manage_menu',
                        kwargs={'restaurant_id': fooditem.restaurant.id})
-
