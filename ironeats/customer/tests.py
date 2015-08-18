@@ -12,7 +12,9 @@ class CreateUserTest(TestCase):
         self.factory = RequestFactory()
 
     def test_details(self):
+        # data = {"username":"a", "password"}
         request = self.factory.post('/register/customer')
+
 
         response = createuser(request)
         self.assertEqual(response.status_code, 200)
