@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 from restaurant.views import createrest
 
-
 # Create your tests here.
 
 class CreateRestTest(TestCase):
