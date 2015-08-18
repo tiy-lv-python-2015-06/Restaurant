@@ -4,7 +4,7 @@
 {% block title %}Create Menu{% endblock %}
 
 {% block content %}
-    <h1>Create Menu</h1>
+    <h1>Create Item</h1>
     <form method="post" action="{%  url 'create_menu' restaurant_id %}">
         {% csrf_token %}
         {{ form.as_p }}

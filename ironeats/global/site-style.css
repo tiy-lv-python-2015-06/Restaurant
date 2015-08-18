@@ -12,28 +12,24 @@ header h1{
     font-weight: bolder;
 }
 
-.boarder-thin{
+.border-thin {
     border-left: 1px solid black;
 }
 
-.bold{
+.bold {
     font-weight: bold;
 }
-/*.top{*/
-    /*color: lightgray;*/
-    /*background: darkred;*/
-    /*font-size: 70px;*/
-    /*margin: 30px;*/
-    /*font-weight: bolder;*/
-/*}*/
+.center {
+    text-align: center
+}
 
-/*.rest-name{*/
-    /*font-size: 40px;*/
-    /*text-align: center;*/
+.border-order {
+    border: 1px solid black;
+}
+.border-bottom {
+    border-bottom: 1px solid black;
+}
 
-/*}*/
-
-.addy{
+.order-title{
     font-size: 20px;
-    color: #080808;
 }

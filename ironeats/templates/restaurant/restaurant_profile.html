@@ -1,25 +1,12 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
-
 {% block title %}Restaurant Profile{% endblock %}
-
 {% block content %}
     {% csrf_token %}
-    <h1>Hi {{ restaurant.business_name }}, welcome to your restaurant profile:</h1>
-        <style type="text/css">
-            .tab { margin-left: 40px; }
-            .tab2 { margin-left: 100px; }
-
-        </style>
-    <br>
-    <h3><p class="tab">ORDERS:</p></h3>
-    <h4><p class="tab2">
-        <a class="btn btn-danger"
-           href="{% url 'order_list' user.restaurant.id %}">
-            Click here to view current orders</a><br>
-    </p></h4>
-    <h3><p class="tab">MENU:</p></h3>
-    <h4><p class="tab2">
+   <div style='text-align: center'>
+    <span class="lead bold">Manage Your Resaurant</span><br><br>
+        <a class="btn btn-danger" href="{% url 'order_list' user.restaurant.id %}">
+            View current orders</a>
         {% if user.restaurant.has_menu %}
             <a class="btn btn-danger"
                href="{% url 'manage_menu' user.restaurant.id %}">
@@ -31,6 +18,5 @@
                 Create Menu
             </a>
         {% endif %}
-    </p></h4>
 {% endblock %}
 

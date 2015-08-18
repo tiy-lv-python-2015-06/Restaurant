@@ -1,26 +1,35 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
-
 {% block title %}Restaurant Order List{% endblock %}
-
 {% block content %}
     {% csrf_token %}
-    <h1>{{ user.restaurant.business_name }}:</h1>
-      <h2>Here is a list of all your current orders:</h2>
-    <center><h4><a class="btn btn-danger"
+    <div class="center">
+        <a class="btn btn-danger"
                    href="{% url 'restaurant_profile' user.restaurant.id %}">
-        Go back to Restaurant profile</a> </h4></center>
-    <ol>
-{#        need to figure how to order by timestamp here#}
-        {% for order in user.restaurant.order_set.all %}
-            <li>
+        Finish</a><br>
+
+        <br>
+        <span class="lead bold">Current Orders:</span><br>
+    </div>
+    <br>
+    {% for order in user.restaurant.order_set.all %}
+        <dl>
+            <div class="border-order">
+            <dt>Ordered at: {{ order.timestamp }}<br>
+                Customer: {{ order.customer.user }}<br><br>
+            </dt>
                 {% for order_item in order.orderitem_set.all %}
-                    {{ order_item.fooditem.name }}&nbsp;&nbsp;
-                    {{ order_item.quantity }}
+                    <dd><span class="border-bottom"> <span class="order-title">{{ order_item.fooditem.name }}&nbsp;&nbsp;</span><br>
+                    <dd>Quantity: {{ order_item.quantity }}</span></dd>
+                    </dd>
                     <br>
                 {% endfor %}
-                Ordered at: {{ order.timestamp }}
-            </li>
-        {% endfor %}
-    </ol>
+            </div>
+            <br>
+    {% endfor %}
+        </dl>
+        <div class="center">
+        <a class="btn btn-danger"
+                   href="{% url 'restaurant_profile' user.restaurant.id %}">
+        Finish</a></div>
 {% endblock %}

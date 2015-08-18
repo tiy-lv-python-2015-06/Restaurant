@@ -4,25 +4,22 @@
 {% block title %}Manage Menu{% endblock %}
 
 {% block content %}
-    <h1>Hello "{{ user.restaurant.business_name }}".
-        Here is your current menu:</h1>
-    <center>
-        <h4><a class="btn btn-danger"
-               href="{% url 'restaurant_profile' restaurant.id %}">
-                Go back to my restaurant profile
-            </a>
-        </h4>
-    </center>
-    <ol>
+    <div class="center">
+    <span class="lead bold">Your Menu</span><br><br>
+    </div>
+    <div class="center">
     <a class="btn btn-danger"
-       href="{% url 'create_menu' user.restaurant.id %}">Add a new menu item</a>
+       href="{% url 'create_menu' user.restaurant.id %}">Add Item</a>
         <br><br><br>
+    </div>
+    <div class="row">
     {% for item in fooditem_list %}
-        <div>
-           <li>{{ item.name }}<br>
-            Price: &nbsp;&nbsp; ${{ item.price | floatformat:2 }}<br>
-            Description: &nbsp;&nbsp; {{ item.description }}<br>
-            Category:  &nbsp;&nbsp; {{ item.category }}<br></li>
+        <div class="col-md-4">
+
+           <span class="lead bold">{{ item.name }}<br></span>
+            <span class="description"> Price:&nbsp;&nbsp; ${{ item.price | floatformat:2 }}<br>
+            Description: &nbsp;&nbsp;{{ item.description }}<br>
+            Category:  &nbsp;&nbsp;{{ item.category }}<br></span>
                <a class="btn btn-danger"
                   href="{% url 'update_menu' item.id %}">Edit</a>&nbsp;
                <a class="btn btn-danger"
@@ -30,5 +27,12 @@
            <br><br>
         </div>
     {% endfor %}
-    </ol>
+    </div>
+    <br>
+    <div class="center">
+   <a class="btn btn-danger"
+               href="{% url 'restaurant_profile' restaurant.id %}">
+                Finish
+            </a>
+    </div>
 {% endblock %}

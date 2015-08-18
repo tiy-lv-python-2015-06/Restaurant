@@ -2,11 +2,10 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block content %}
-    <h2 class="title">Your Recent Orders</h2>
-            {% for orderitem in orders %}
-            {{ orderitem.fooditem.name }}
-            {{ orderitem.fooditem.price }}
-            {% endfor %}
-            <br>
     <p><h3 class="thanks">Thank You For Your Order </h3></p>
+    <br>
+            {% for orderitem in orders %}
+            <span class="lead bold">{{ orderitem.fooditem.name }}</span><br>
+            <span class="description">Quantity {{ orderitem.quantity }}</span><br><br>
+            {% endfor %}
 {% endblock %}

@@ -4,20 +4,10 @@
 {% block title %}Manage Menu{% endblock %}
 
 {% block content %}
-    <h1>Hi "{{ fooditem.restaurant.name }}".  Here is your current menu:</h1>
-    Your Food item id is: {{ fooditem.id }}
-{#    <ol>#}
-{#    {% for item in restaurant.fooditem_set.all %}#}
-{#       <li> Name: {{ item.name }}<br>#}
-{#            Price: {{ item.price }}<br>#}
-{#            Description: {{ item.description }}<br>#}
-{#            Category:  {{ item.category }}<br></li>#}
-{#    {% endfor %}#}
-{#    </ol>#}
         <form method="post" action="{%  url 'update_menu' fooditem.id %}">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" name="submit" value="Submit Change">
+            <input type="submit" name="submit" value="Submit Change" class="btn btn-danger">
         </form>
 
     </center>
