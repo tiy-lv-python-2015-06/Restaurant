@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -41,7 +42,7 @@ class FoodItem(models.Model):
     )
     restaurant = models.ForeignKey(Restaurant)
     name = models.CharField(max_length=50)
-    price = models.FloatField()
+    price = models.FloatField(validators=[MinValueValidator(0)])
     description = models.CharField(max_length=150)
     category = models.CharField(max_length=2, choices=MENU_CATEGORY_CHOICES,
                                 default=ENTREE, verbose_name='Menu Category')
