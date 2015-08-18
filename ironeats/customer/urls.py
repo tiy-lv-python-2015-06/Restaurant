@@ -12,7 +12,8 @@ urlpatterns = [
 
     url(r'^(?P<pk>[0-9]+)/', customer.views.menu, name='menu'),
 
-    url(r'^order/(?P<pk>[0-9]+)/', login_required(PlaceOrder.as_view()), name='order'),
+    url(r'^order/(?P<pk>[0-9]+)/',
+        login_required(PlaceOrder.as_view()), name='order'),
 
     url(r'^confirm/', Confirm.as_view(), name='confirm'),
 

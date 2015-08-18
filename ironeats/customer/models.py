@@ -33,4 +33,5 @@ class Order(models.Model):
 class OrderItem(models.Model):
     fooditem = models.ForeignKey(FoodItem)
     order = models.ForeignKey(Order)
-    quantity = models.IntegerField(validators=[MinValueValidator(1)], blank=False)
+    quantity = models.IntegerField(
+        validators=[MinValueValidator(1)], blank=False)

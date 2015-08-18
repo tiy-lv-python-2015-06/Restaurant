@@ -10,6 +10,7 @@ class UserForm(ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
+
 class FoodItemForm(ModelForm):
     class Meta:
         model = FoodItem

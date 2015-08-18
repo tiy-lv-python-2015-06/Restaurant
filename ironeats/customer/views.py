@@ -1,14 +1,11 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from customer.forms import CustomerCreationForm
 from customer.models import Customer
 from django.views.generic import ListView, CreateView
 from customer.models import Order, OrderItem
-from restaurant.forms import UserForm
 from restaurant.models import Restaurant, FoodItem
 
 
@@ -42,7 +39,8 @@ def menu(request, pk):
     except:
         current_order = []
     return render(request, "order/menu.html",
-                  context={'foods': restaurant.fooditem_set.all(), 'pk': pk, 'current_order': current_order})
+                  context={'foods': restaurant.fooditem_set.all(),
+                           'pk': pk, 'current_order': current_order})
 
 
 class PlaceOrder(CreateView):
@@ -109,9 +107,8 @@ def createuser(request):
             customer.phone = data['phone']
             customer.save()
             user = authenticate(username=request.POST['username'],
-                                    password=request.POST['password1'])
+                                password=request.POST['password1'])
             login(request, user)
-
 
             return HttpResponseRedirect(reverse('home'))
     else:
