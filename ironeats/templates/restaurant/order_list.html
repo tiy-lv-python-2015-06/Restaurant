@@ -16,7 +16,7 @@
         <dl>
             <div class="border-order">
             <dt>Ordered at: {{ order.timestamp }}<br>
-                Customer: {{ order.customer.user }}<br><br>
+                Customer: {{ order.customer.user }} - Phone Number: {{ order.customer.phone }}<br><br>
             </dt>
                 {% for order_item in order.orderitem_set.all %}
                     <dd><span class="border-bottom"> <span class="order-title">{{ order_item.fooditem.name }}&nbsp;&nbsp;</span><br>
