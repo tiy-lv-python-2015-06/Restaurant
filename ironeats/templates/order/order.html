@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% block content %}
-    <span class="lead bold">Name:  &nbsp;{{ fooditem.name }}</span>
-    <br>
-    <span class="description">Description:  &nbsp;{{ fooditem.description }}</span>
-    <form method="post" action="{%  url 'order' pk=restaurant.id %}" class="form">
-        {% csrf_token %}
-        {% for field in form %}
-            ${{ fooditem.price | floatformat:2 }}<br><br>
-            QTY<br>
-            {{ field }}
-        {% endfor %}
-        <br>
-        <input type="hidden" name="fooditempk" value={{ fooditem.pk }}>
-        <input type="submit" value='Order' class="btn btn-danger">
-    </form>
+    <div class="row">
+       <div class="col-md-8">
+            <span class="lead bold">{{ fooditem.name }}</span>
+            <br>
+            <span class="description">{{ fooditem.description }}</span>
+            <form method="post" action="{%  url 'order' pk=restaurant.id %}" class="form">
+                {% csrf_token %}
+                {% for field in form %}
+                    ${{ fooditem.price | floatformat:2 }}<br><br>
+                    Quantity<br>
+                    {{ field }}
+                {% endfor %}
+                <br><br>
+                <input type="hidden" name="fooditempk" value={{ fooditem.pk }}>
+                <input type="submit" value='Order' class="btn btn-danger">
+            </form>
+       </div>
+    </div>
 {% endblock %}
