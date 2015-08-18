@@ -1,18 +1,19 @@
 from django.test import TestCase
+from django.test.client import RequestFactory
+from restaurant.views import createrest
+
 
 # Create your tests here.
-from restaurant.models import Restaurant
 
+class CreateRestTest(TestCase):
+    """
+    Test createrest at url w/ POST
+    """
+    def setUp(self):
+        self.factory = RequestFactory()
 
-class RestaurantTestCase(TestCase):
+    def test_details(self):
+        request = self.factory.post('/register/restaurant')
 
-    def createRest(self):
-        Restaurant.objects.create(business_name= 'testrest',
-                                  email= 'test@test.com',
-                                  address= '11 Test Cir',
-                                  city= 'Test Vegas',
-                                  state= 'NV',
-                                  zip_code= '89104',)
-
-    # def testRestAttrs(self):
-    #     testrest = Restaurant.objects.get(business_name= 'testrest')
+        response = createrest(request)
+        self.assertEqual(response.status_code, 200)
