@@ -1,7 +1,7 @@
 from django.conf.urls import url
 #
 from django.contrib.auth.decorators import login_required
-from customer.views import CustomerCreate, Confirm
+from customer.views import Confirm
 
 import customer
 from customer.views import PlaceOrder

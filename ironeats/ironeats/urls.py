@@ -4,8 +4,7 @@ from django.views.generic import TemplateView
 import customer
 from customer.views import Home
 from django.contrib.auth import views as auth_views
-import restaurant
-from restaurant.views import RestaurantCreate
+
 
 urlpatterns = [
     url(r'^register/restaurant', 'restaurant.views.createrest', name='rest_reg'),

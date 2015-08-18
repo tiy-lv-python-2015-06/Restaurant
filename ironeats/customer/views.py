@@ -17,19 +17,6 @@ class Home(ListView):
     paginate_by = 10
 
 
-class CustomerCreate(CreateView):
-    model = Customer
-    fields = ['address', 'city',
-              'state', 'zip_code', 'phone']
-    template_name = 'registration/customer_registration.html'
-    success_url = '/'
-
-    def form_valid(self, form):
-        customer = form.save(commit=False)
-        customer.user = self.request.user
-        return super(CustomerCreate, self).form_valid(form)
-
-
 def menu(request, pk):
     restaurant = Restaurant.objects.get(pk=pk)
     current_order = []

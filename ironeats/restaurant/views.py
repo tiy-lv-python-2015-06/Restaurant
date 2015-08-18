@@ -29,28 +29,6 @@ def login_redirect(request):
         return HttpResponseRedirect(reverse('home'))
 
 
-class RestaurantCreate(CreateView):
-    model = Restaurant
-    fields = ['business_name', 'email', 'address', 'city',
-              'state', 'zip_code', 'phone_number']
-    template_name = 'registration/restaurant_registration.html'
-
-    def get_success_url(self):
-       return reverse('restaurant/restaurant_profile/',
-                      kwargs={'restaurant':
-                             self.kwargs.get('restaurant_id', None)})
-
-    def form_valid(self, form):
-        restaurant = form.save(commit=False)
-        restaurant.user = self.request.user
-        return super(RestaurantCreate, self).form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super(RestaurantCreate, self).get_context_data(**kwargs)
-        context['user'] = self.request.user.restaurant.id
-        return context
-
-
 def createrest(request):
     if request.method == 'POST':
         form = RestaurantCreateForm(request.POST)

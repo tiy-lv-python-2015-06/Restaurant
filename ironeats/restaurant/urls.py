@@ -1,11 +1,4 @@
-from django.conf.urls import url, include
-from django.contrib.auth.decorators import login_required
-
-import restaurant
-
-from restaurant.views import RestaurantProfile, OrderList, RestaurantCreate
-from django.contrib.auth import views as auth_views
-
+from django.conf.urls import url
 from restaurant.views import RestaurantProfile, OrderList, CreateMenu, \
     UpdateMenu, ManageMenu, DeleteItem
 
