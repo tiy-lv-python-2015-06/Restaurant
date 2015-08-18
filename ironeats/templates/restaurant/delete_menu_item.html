@@ -4,12 +4,14 @@
 {% block title %}Delete Menu Item{% endblock %}
 
 {% block content %}
-    <h1>Delete Menu Item</h1>
-    <form method="post" action="{%  url 'delete_menu_item' fooditem.id %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <a href="{% url 'manage_menu' fooditem.restaurant.id %}">No, cancel.</a>&nbsp;
-        <input type="submit" name="submit" value="Yes! Delete">
+    <div class="center">
+        <span class="lead bold"> Delete Menu Item?</span><br><br>
+        <form method="post" action="{%  url 'delete_menu_item' fooditem.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a class="btn btn-danger" href="{% url 'manage_menu' fooditem.restaurant.id %}">No, cancel.</a>&nbsp;
+            <input class="btn btn-danger" type="submit" name="submit" value="Yes! Delete">
+    </div>
     </form>
 
 {% endblock %}
